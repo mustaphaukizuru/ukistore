@@ -1,0 +1,96 @@
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: $font-body;
+  background: $bg;
+  color: $text;
+  line-height: 1.6;
+  overflow-x: hidden;
+  @include scrollbar;
+}
+h1,h2,h3,h4,h5,h6 { font-family: $font-heading; line-height: 1.25; color: $text; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+button { font-family: $font-body; }
+input, select, textarea { font-family: $font-body; }
+
+.container { max-width: 1280px; }
+
+// ── Gradient text ─────────────────────────────────
+.grad { @include grad-text; }
+
+// ── Section label ─────────────────────────────────
+.section-label {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: $accent;
+  background: rgba($accent, 0.08); border: 1px solid rgba($accent, 0.2);
+  padding: 0.3rem 0.8rem; border-radius: 99px;
+  &::before { content:''; width:5px; height:5px; background:$accent; border-radius:50%; }
+}
+
+// ── Reveal animation ─────────────────────────────
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  &.visible { opacity: 1; transform: translateY(0); }
+}
+
+// ── Toast ─────────────────────────────────────────
+.toast-container {
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999;
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+.toast {
+  display: flex; align-items: center; gap: 0.75rem;
+  background: $surface-2; border: 1px solid $border;
+  border-radius: $r-md; padding: 0.85rem 1.1rem;
+  font-size: 0.875rem; color: $text;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  animation: toast-in 0.3s ease;
+  min-width: 240px; max-width: 320px;
+  .toast-icon { font-size: 1.1rem; flex-shrink: 0; }
+  &.toast-success { border-color: rgba($success, 0.3); .toast-icon { color: $success; } }
+  &.toast-error   { border-color: rgba($danger, 0.3);  .toast-icon { color: $danger; } }
+  &.toast-info    { border-color: rgba($accent, 0.3);  .toast-icon { color: $accent; } }
+}
+@keyframes toast-in {
+  from { opacity:0; transform: translateX(20px); }
+  to   { opacity:1; transform: translateX(0); }
+}
+
+// ── Empty state ───────────────────────────────────
+.empty-state {
+  text-align: center; padding: 4rem 2rem;
+  .empty-icon { font-size: 3.5rem; margin-bottom: 1rem; opacity: 0.5; }
+  h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+  p  { font-size: 0.875rem; color: $text-muted; }
+}
+
+// ── Rating stars ──────────────────────────────────
+.stars {
+  display: flex; gap: 2px; align-items: center;
+  .star { color: $warning; font-size: 0.8rem; }
+  .star.empty { color: $text-dim; }
+}
+
+// ── Price styles ──────────────────────────────────
+.price-new { font-family: $font-heading; font-weight: 700; color: $text; }
+.price-old { font-size: 0.8rem; color: $text-muted; text-decoration: line-through; margin-left: 0.4rem; }
+.price-badge {
+  font-size: 0.68rem; font-weight: 700; padding: 0.15rem 0.5rem;
+  background: rgba($danger, 0.15); color: $danger;
+  border-radius: 4px; margin-left: 0.4rem;
+}
+
+// ── Skeleton loader ───────────────────────────────
+.skeleton {
+  background: linear-gradient(90deg, $surface 25%, $surface-2 50%, $surface 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: $r-md;
+}
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+// ── Scrollbar everywhere ──────────────────────────
+@include scrollbar;

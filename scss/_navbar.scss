@@ -1,0 +1,72 @@
+// ── Navbar ────────────────────────────────────────
+.navbar-store {
+  position: sticky; top: 0; z-index: 500;
+  background: rgba($bg, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid $border;
+  padding: 0.875rem 0;
+  transition: all $t-normal;
+
+  .brand {
+    font-family: $font-heading; font-weight: 800; font-size: 1.3rem;
+    @include flex-gap(0.5rem);
+    .brand-icon {
+      width: 32px; height: 32px; border-radius: 9px;
+      background: linear-gradient(135deg, $accent, $accent-2);
+      @include flex-center; font-size: 1rem;
+    }
+  }
+
+  .nav-actions { @include flex-gap(0.5rem); }
+
+  .search-bar {
+    position: relative; flex: 1; max-width: 480px;
+    input {
+      @include input-base;
+      padding-left: 2.5rem; padding-right: 1rem;
+      background: $surface-2; border-radius: 99px;
+      font-size: 0.85rem;
+    }
+    .search-icon {
+      position: absolute; left: 0.875rem; top: 50%;
+      transform: translateY(-50%); color: $text-muted; font-size: 0.9rem;
+      pointer-events: none;
+    }
+    .search-clear {
+      position: absolute; right: 0.875rem; top: 50%;
+      transform: translateY(-50%); color: $text-muted; font-size: 0.8rem;
+      cursor: pointer; background: none; border: none; padding: 0;
+      display: none;
+      &.visible { display: block; }
+      &:hover { color: $text; }
+    }
+  }
+
+  .icon-btn {
+    position: relative;
+    width: 40px; height: 40px; border-radius: $r-md;
+    background: $surface; border: 1px solid $border;
+    @include flex-center; cursor: pointer; color: $text-muted;
+    transition: all $t-fast; font-size: 1rem;
+    &:hover { border-color: $accent; color: $accent; background: rgba($accent, 0.08); }
+
+    .badge-count {
+      position: absolute; top: -5px; right: -5px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: $accent; color: #fff; font-size: 0.65rem;
+      font-weight: 700; @include flex-center;
+      border: 2px solid $bg; display: none;
+      &.visible { display: flex; }
+    }
+  }
+}
+
+// ── Mobile search toggle ──────────────────────────
+.mobile-search {
+  display: none; padding: 0.75rem 1rem;
+  border-top: 1px solid $border;
+  background: $bg-2;
+  &.open { display: block; }
+  input { @include input-base; border-radius: 99px; font-size: 0.875rem; }
+}

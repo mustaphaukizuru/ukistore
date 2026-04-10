@@ -1,0 +1,17 @@
+{
+  "name": "ukistore",
+  "version": "1.0.0",
+  "description": "Modern E-Commerce Store — HTML, CSS, SCSS, Bootstrap, JS, JSON",
+  "author": "Mustapha Ukizuru",
+  "scripts": {
+    "sass:build": "sass scss/main.scss css/main.css --style=compressed --no-source-map",
+    "sass:watch": "sass scss/main.scss css/main.css --watch --no-source-map",
+    "serve": "npx http-server . -p 3000 -o",
+    "start": "concurrently \"npm run sass:watch\" \"npm run serve\""
+  },
+  "devDependencies": {
+    "sass": "^1.69.5",
+    "http-server": "^14.1.1",
+    "concurrently": "^8.2.2"
+  }
+}

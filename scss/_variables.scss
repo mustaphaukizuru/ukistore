@@ -1,0 +1,62 @@
+// ── Colors ────────────────────────────────────────
+$bg:           #0a0a0f;
+$bg-2:         #111118;
+$surface:      #16161f;
+$surface-2:    #1e1e2a;
+$surface-3:    #252535;
+$border:       rgba(139, 92, 246, 0.12);
+$border-hover: rgba(139, 92, 246, 0.35);
+
+$accent:       #8b5cf6;
+$accent-2:     #a78bfa;
+$accent-3:     #c4b5fd;
+$accent-glow:  rgba(139, 92, 246, 0.2);
+
+$text:         #f5f3ff;
+$text-muted:   #8b88a8;
+$text-dim:     #3d3d55;
+
+$success:      #10b981;
+$warning:      #f59e0b;
+$danger:       #ef4444;
+$info:         #06b6d4;
+
+// ── Tags / category colors ────────────────────────
+$cat-electronics: #06b6d4;
+$cat-fashion:     #ec4899;
+$cat-home:        #10b981;
+$cat-sports:      #f59e0b;
+$cat-beauty:      #a855f7;
+$cat-books:       #6366f1;
+
+// ── Typography ────────────────────────────────────
+$font-heading: 'Plus Jakarta Sans', sans-serif;
+$font-body:    'Inter', sans-serif;
+$font-mono:    'JetBrains Mono', monospace;
+
+// ── Spacing ───────────────────────────────────────
+$gap-xs:  0.25rem;
+$gap-sm:  0.5rem;
+$gap-md:  1rem;
+$gap-lg:  1.5rem;
+$gap-xl:  2rem;
+$gap-2xl: 3rem;
+$gap-3xl: 5rem;
+
+// ── Borders & radius ──────────────────────────────
+$r-sm:  6px;
+$r-md:  10px;
+$r-lg:  16px;
+$r-xl:  24px;
+$r-2xl: 32px;
+
+// ── Transitions ───────────────────────────────────
+$t-fast:   0.15s ease;
+$t-normal: 0.25s ease;
+$t-slow:   0.4s ease;
+
+// ── Breakpoints ───────────────────────────────────
+$bp-sm:  576px;
+$bp-md:  768px;
+$bp-lg:  992px;
+$bp-xl:  1200px;

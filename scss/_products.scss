@@ -1,0 +1,210 @@
+// ── Product Card ─────────────────────────────────
+.product-card {
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $r-lg;
+  overflow: hidden;
+  @include card-hover;
+  position: relative;
+  height: 100%;
+  display: flex; flex-direction: column;
+
+  .card-thumb {
+    position: relative; overflow: hidden;
+    background: $surface-2;
+    height: 220px;
+    @include flex-center;
+    font-size: 5rem;
+    cursor: pointer;
+
+    &::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba($accent, 0);
+      transition: background $t-normal;
+    }
+
+    .thumb-actions {
+      position: absolute; bottom: -50px; left: 0; right: 0;
+      display: flex; gap: 0.4rem; justify-content: center;
+      padding: 0 1rem; transition: bottom $t-normal;
+      z-index: 2;
+    }
+
+    &:hover {
+      &::after { background: rgba($accent, 0.08); }
+      .thumb-actions { bottom: 0.875rem; }
+    }
+  }
+
+  .card-badges {
+    position: absolute; top: 0.75rem; left: 0.75rem;
+    display: flex; flex-direction: column; gap: 0.3rem; z-index: 2;
+  }
+
+  .wish-btn {
+    position: absolute; top: 0.75rem; right: 0.75rem; z-index: 2;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba($bg, 0.75); border: 1px solid $border;
+    @include flex-center; cursor: pointer; color: $text-muted;
+    transition: all $t-fast; font-size: 0.9rem;
+    &:hover, &.active { color: #ef4444; border-color: rgba(#ef4444, 0.3); background: rgba(#ef4444, 0.1); }
+  }
+
+  .card-body {
+    padding: 1.1rem; flex: 1; display: flex; flex-direction: column;
+  }
+
+  .card-category {
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 0.4rem; color: $accent-2;
+  }
+
+  .card-name {
+    font-family: $font-heading; font-size: 0.95rem; font-weight: 600;
+    @include clamp(2); margin-bottom: 0.5rem; flex: 1;
+    cursor: pointer;
+    &:hover { color: $accent-2; }
+  }
+
+  .card-rating {
+    @include flex-gap(0.4rem); margin-bottom: 0.6rem;
+    .rating-count { font-size: 0.75rem; color: $text-muted; }
+  }
+
+  .card-price { @include flex-gap(0.2rem); align-items: baseline; margin-bottom: 1rem; }
+
+  .card-footer {
+    display: flex; gap: 0.4rem;
+    .add-btn { flex: 1; @include btn-base; background: $accent; color: #fff; justify-content: center; font-size: 0.82rem; padding: 0.55rem 1rem;
+      &:hover { background: lighten($accent, 8%); transform: translateY(-1px); box-shadow: 0 6px 20px rgba($accent, 0.35); }
+    }
+    .quick-btn { width: 36px; height: 36px; border-radius: $r-md; background: $surface-2; border: 1px solid $border; @include flex-center; cursor: pointer; font-size: 0.85rem; color: $text-muted; flex-shrink: 0; transition: all $t-fast;
+      &:hover { border-color: $accent; color: $accent; }
+    }
+  }
+
+  // Out of stock
+  &.out-of-stock {
+    .card-thumb::after { background: rgba($bg, 0.5); }
+    .add-btn { background: $surface-3; color: $text-muted; cursor: not-allowed;
+      &:hover { transform: none; box-shadow: none; }
+    }
+  }
+}
+
+// ── Badges ────────────────────────────────────────
+.badge-new    { @include badge($success); }
+.badge-sale   { @include badge($danger); }
+.badge-hot    { @include badge($warning); }
+.badge-out    { @include badge($text-muted); }
+
+// ── Category Pill ─────────────────────────────────
+.cat-pill {
+  @include flex-gap(0.35rem);
+  font-size: 0.8rem; font-weight: 500; padding: 0.45rem 1rem;
+  border-radius: 99px; border: 1px solid $border;
+  background: $surface; color: $text-muted;
+  cursor: pointer; transition: all $t-fast; white-space: nowrap;
+  .cat-count { font-size: 0.7rem; color: $text-dim; }
+
+  &:hover, &.active {
+    background: rgba($accent, 0.1); border-color: $accent;
+    color: $accent-2;
+    .cat-count { color: $accent-2; }
+  }
+}
+
+// ── Filter Sidebar ────────────────────────────────
+.filter-sidebar {
+  background: $surface; border: 1px solid $border;
+  border-radius: $r-lg; padding: 1.25rem;
+  @include scrollbar;
+
+  .filter-section { margin-bottom: 1.5rem;
+    &:last-child { margin-bottom: 0; }
+  }
+  .filter-title {
+    font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: $text-muted; margin-bottom: 0.875rem;
+    @include flex-between;
+    .filter-clear { font-size: 0.7rem; text-transform: none; letter-spacing: 0; color: $accent; cursor: pointer; font-weight: 500;
+      &:hover { text-decoration: underline; }
+    }
+  }
+
+  // Price range
+  .price-range {
+    input[type=range] {
+      width: 100%; accent-color: $accent; cursor: pointer;
+      height: 3px; background: transparent;
+    }
+    .range-labels { @include flex-between; font-size: 0.8rem; color: $text-muted; margin-top: 0.4rem; }
+  }
+
+  // Checkboxes
+  .filter-check {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.35rem 0; cursor: pointer; font-size: 0.875rem; color: $text-muted;
+    transition: color $t-fast;
+    &:hover { color: $text; }
+    input[type=checkbox] { accent-color: $accent; width: 15px; height: 15px; cursor: pointer; }
+    .check-count { margin-left: auto; font-size: 0.72rem; color: $text-dim; }
+    &:has(input:checked) { color: $accent-2; }
+  }
+
+  // Rating filter
+  .rating-filter {
+    display: flex; flex-direction: column; gap: 0.35rem;
+    .r-opt {
+      @include flex-gap(0.5rem); padding: 0.35rem 0.6rem;
+      border-radius: $r-sm; cursor: pointer; transition: background $t-fast;
+      font-size: 0.8rem; color: $text-muted;
+      &:hover, &.active { background: rgba($accent, 0.08); color: $accent-2; }
+    }
+  }
+}
+
+// ── Sort Bar ──────────────────────────────────────
+.sort-bar {
+  @include flex-between; flex-wrap: wrap; gap: 0.75rem;
+  padding: 0.875rem 1.1rem; background: $surface;
+  border: 1px solid $border; border-radius: $r-md; margin-bottom: 1.25rem;
+
+  .results-text { font-size: 0.875rem; color: $text-muted;
+    strong { color: $text; }
+  }
+
+  .sort-controls { @include flex-gap(0.6rem); }
+
+  .sort-select {
+    @include input-base; padding: 0.5rem 0.875rem;
+    border-radius: $r-md; font-size: 0.82rem; cursor: pointer;
+    background: $surface-2; min-width: 150px;
+    option { background: $bg-2; }
+  }
+
+  .view-btns { @include flex-gap(0.3rem);
+    .view-btn {
+      width: 34px; height: 34px; @include flex-center;
+      border-radius: $r-sm; border: 1px solid $border;
+      background: transparent; color: $text-muted; cursor: pointer;
+      transition: all $t-fast; font-size: 0.9rem;
+      &.active, &:hover { background: rgba($accent, 0.1); border-color: $accent; color: $accent; }
+    }
+  }
+}
+
+// ── Grid / List views ─────────────────────────────
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.1rem;
+  &.list-view {
+    grid-template-columns: 1fr;
+    .product-card { flex-direction: row;
+      .card-thumb { width: 180px; height: 100%; flex-shrink: 0; min-height: 160px; }
+      .card-body { padding: 1.25rem; }
+    }
+    @include max-sm { .product-card { flex-direction: column; } }
+  }
+}

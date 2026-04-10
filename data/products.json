@@ -1,0 +1,170 @@
+[
+  {
+    "id": 1, "name": "Pro Wireless Headphones X1", "category": "Electronics",
+    "price": 129.99, "oldPrice": 179.99, "emoji": "🎧",
+    "rating": 4.8, "reviews": 2341, "stock": 45,
+    "badge": "hot", "tags": ["Wireless", "Noise Cancel", "40hr Battery"],
+    "description": "Premium over-ear headphones with active noise cancellation, 40-hour battery life, and Hi-Res Audio certification. Foldable design perfect for travel."
+  },
+  {
+    "id": 2, "name": "Smart Watch Series 9", "category": "Electronics",
+    "price": 299.00, "oldPrice": null, "emoji": "⌚",
+    "rating": 4.6, "reviews": 1876, "stock": 12,
+    "badge": "new", "tags": ["GPS", "Health Monitor", "AMOLED"],
+    "description": "Advanced smartwatch with health monitoring, GPS, AMOLED display, and 7-day battery. Water resistant to 50m."
+  },
+  {
+    "id": 3, "name": "4K Action Camera Pro", "category": "Electronics",
+    "price": 249.99, "oldPrice": 349.99, "emoji": "📷",
+    "rating": 4.5, "reviews": 934, "stock": 0,
+    "badge": "sale", "tags": ["4K", "Waterproof", "Stabilizer"],
+    "description": "Professional action camera with 4K/120fps recording, HorizonSteady stabilization, and waterproof up to 10m."
+  },
+  {
+    "id": 4, "name": "Mechanical Keyboard RGB", "category": "Electronics",
+    "price": 89.99, "oldPrice": 119.99, "emoji": "⌨️",
+    "rating": 4.7, "reviews": 3102, "stock": 78,
+    "badge": "sale", "tags": ["Cherry MX", "RGB", "TKL"],
+    "description": "Tenkeyless mechanical keyboard with Cherry MX Red switches, per-key RGB backlighting, and aircraft-grade aluminum frame."
+  },
+  {
+    "id": 5, "name": "Portable SSD 2TB", "category": "Electronics",
+    "price": 149.99, "oldPrice": null, "emoji": "💾",
+    "rating": 4.9, "reviews": 5621, "stock": 200,
+    "badge": "hot", "tags": ["2000MB/s", "USB-C", "Rugged"],
+    "description": "Ultra-fast portable SSD with 2000MB/s read speeds, USB 3.2 Gen 2, drop-resistant and IP55 water resistance."
+  },
+  {
+    "id": 6, "name": "True Wireless Earbuds", "category": "Electronics",
+    "price": 59.99, "oldPrice": 89.99, "emoji": "🎵",
+    "rating": 4.4, "reviews": 7823, "stock": 155,
+    "badge": "sale", "tags": ["ANC", "Transparency", "30hr"],
+    "description": "Premium true wireless earbuds with hybrid ANC, transparency mode, 30-hour total playback, and IPX4 water resistance."
+  },
+  {
+    "id": 7, "name": "Oversized Hoodie Premium", "category": "Fashion",
+    "price": 54.99, "oldPrice": 79.99, "emoji": "🧥",
+    "rating": 4.6, "reviews": 1243, "stock": 89,
+    "badge": "sale", "tags": ["100% Cotton", "Unisex", "S-3XL"],
+    "description": "Ultra-soft premium cotton oversized hoodie. Pre-shrunk, brushed interior fleece, and reinforced kangaroo pocket."
+  },
+  {
+    "id": 8, "name": "Running Shoes AeroFit", "category": "Fashion",
+    "price": 119.99, "oldPrice": null, "emoji": "👟",
+    "rating": 4.7, "reviews": 2987, "stock": 34,
+    "badge": "new", "tags": ["Responsive", "Breathable", "7-13 US"],
+    "description": "Lightweight running shoes with AeroFit cushioning system, breathable mesh upper, and carbon-fiber reinforced plate for maximum energy return."
+  },
+  {
+    "id": 9, "name": "Leather Crossbody Bag", "category": "Fashion",
+    "price": 79.99, "oldPrice": 129.99, "emoji": "👜",
+    "rating": 4.5, "reviews": 876, "stock": 27,
+    "badge": "sale", "tags": ["Genuine Leather", "Adjustable", "RFID"],
+    "description": "Handcrafted genuine leather crossbody bag with RFID-blocking interior, multiple compartments, and adjustable strap."
+  },
+  {
+    "id": 10, "name": "Classic Denim Jacket", "category": "Fashion",
+    "price": 64.99, "oldPrice": null, "emoji": "🫺",
+    "rating": 4.3, "reviews": 543, "stock": 62,
+    "badge": null, "tags": ["Denim", "Vintage Wash", "XS-XXL"],
+    "description": "Timeless denim jacket with vintage wash finish, button closure, and chest pockets. A wardrobe essential."
+  },
+  {
+    "id": 11, "name": "Smart Air Purifier 360", "category": "Home",
+    "price": 199.99, "oldPrice": 249.99, "emoji": "🌬️",
+    "rating": 4.8, "reviews": 1654, "stock": 23,
+    "badge": "hot", "tags": ["HEPA H13", "WiFi", "500 sq ft"],
+    "description": "360° air purification with HEPA H13 filter, activated carbon, UV-C LED, and app control. Covers up to 500 sq ft in 12 minutes."
+  },
+  {
+    "id": 12, "name": "Ergonomic Office Chair", "category": "Home",
+    "price": 349.99, "oldPrice": 499.99, "emoji": "🪑",
+    "rating": 4.7, "reviews": 2134, "stock": 8,
+    "badge": "sale", "tags": ["Lumbar Support", "Breathable", "4D Arms"],
+    "description": "Full ergonomic office chair with 4D adjustable armrests, lumbar support, breathable mesh back, and adjustable headrest."
+  },
+  {
+    "id": 13, "name": "Scented Candle Set (6pc)", "category": "Home",
+    "price": 34.99, "oldPrice": null, "emoji": "🕯️",
+    "rating": 4.9, "reviews": 4321, "stock": 320,
+    "badge": "hot", "tags": ["Soy Wax", "60hr each", "Gift Box"],
+    "description": "Luxury soy wax candle set with 6 hand-poured scents: Vanilla Noir, Sea Breeze, Cedarwood, Rose & Jasmine, Citrus Burst, and Midnight Oud."
+  },
+  {
+    "id": 14, "name": "Indoor Plant Collection", "category": "Home",
+    "price": 44.99, "oldPrice": 64.99, "emoji": "🌿",
+    "rating": 4.6, "reviews": 789, "stock": 54,
+    "badge": "sale", "tags": ["3 Plants", "Pots Included", "Easy Care"],
+    "description": "Curated set of 3 low-maintenance indoor plants (Pothos, Snake Plant, ZZ Plant) with decorative ceramic pots."
+  },
+  {
+    "id": 15, "name": "Yoga Mat Pro 6mm", "category": "Sports",
+    "price": 49.99, "oldPrice": 69.99, "emoji": "🧘",
+    "rating": 4.8, "reviews": 3456, "stock": 145,
+    "badge": "sale", "tags": ["Non-Slip", "6mm", "Eco TPE"],
+    "description": "Professional grade eco-TPE yoga mat with superior grip, 6mm cushioning, alignment lines, and carry strap. Free of PVC and latex."
+  },
+  {
+    "id": 16, "name": "Adjustable Dumbbell Set", "category": "Sports",
+    "price": 189.99, "oldPrice": 259.99, "emoji": "🏋️",
+    "rating": 4.7, "reviews": 2876, "stock": 19,
+    "badge": "hot", "tags": ["5-52.5 lbs", "Space Saving", "Quick Adjust"],
+    "description": "Space-saving adjustable dumbbell set that replaces 15 sets of weights. Quick-adjust dial system, durable molded grip."
+  },
+  {
+    "id": 17, "name": "Smart Water Bottle 1L", "category": "Sports",
+    "price": 39.99, "oldPrice": null, "emoji": "🍶",
+    "rating": 4.5, "reviews": 1234, "stock": 87,
+    "badge": "new", "tags": ["LED Reminder", "BPA Free", "Insulated"],
+    "description": "Smart insulated water bottle with hydration reminder LEDs, temperature display, BPA-free Tritan construction. Keeps drinks cold 24hr / hot 12hr."
+  },
+  {
+    "id": 18, "name": "Resistance Bands Kit", "category": "Sports",
+    "price": 24.99, "oldPrice": 39.99, "emoji": "💪",
+    "rating": 4.6, "reviews": 5678, "stock": 234,
+    "badge": "sale", "tags": ["5 Levels", "Fabric", "Carry Bag"],
+    "description": "Complete resistance band kit with 5 fabric bands (10-50 lbs), ankle straps, handles, and door anchor. Perfect for home gym workouts."
+  },
+  {
+    "id": 19, "name": "Vitamin C Serum 30ml", "category": "Beauty",
+    "price": 29.99, "oldPrice": 44.99, "emoji": "✨",
+    "rating": 4.8, "reviews": 8923, "stock": 178,
+    "badge": "hot", "tags": ["20% Vit C", "Hyaluronic", "Cruelty Free"],
+    "description": "Clinical-strength 20% Vitamin C serum with Hyaluronic Acid and Niacinamide. Brightens, firms, and protects. Dermatologist tested."
+  },
+  {
+    "id": 20, "name": "Hydrating Face Cream", "category": "Beauty",
+    "price": 38.99, "oldPrice": null, "emoji": "🧴",
+    "rating": 4.7, "reviews": 3421, "stock": 92,
+    "badge": "new", "tags": ["All Skin Types", "SPF 30", "Non-Greasy"],
+    "description": "Lightweight daily moisturizer with broad-spectrum SPF 30, ceramides, and peptides. Hydrates for 72 hours without clogging pores."
+  },
+  {
+    "id": 21, "name": "Jade Gua Sha Set", "category": "Beauty",
+    "price": 19.99, "oldPrice": 34.99, "emoji": "💚",
+    "rating": 4.6, "reviews": 2145, "stock": 0,
+    "badge": "sale", "tags": ["Natural Jade", "Face + Eye", "Pouch"],
+    "description": "Authentic jade gua sha facial tool set. Reduces puffiness, improves circulation, and defines facial contours. Includes storage pouch."
+  },
+  {
+    "id": 22, "name": "Atomic Habits (Hardcover)", "category": "Books",
+    "price": 18.99, "oldPrice": 27.99, "emoji": "📚",
+    "rating": 4.9, "reviews": 45231, "stock": 500,
+    "badge": "hot", "tags": ["Bestseller", "Self-Help", "James Clear"],
+    "description": "The #1 New York Times bestseller. Tiny Changes, Remarkable Results. Over 10 million copies sold worldwide. Hardcover edition."
+  },
+  {
+    "id": 23, "name": "Clean Code (Paperback)", "category": "Books",
+    "price": 34.99, "oldPrice": null, "emoji": "💻",
+    "rating": 4.8, "reviews": 12876, "stock": 89,
+    "badge": "new", "tags": ["Programming", "Robert Martin", "Best Practices"],
+    "description": "A Handbook of Agile Software Craftsmanship by Robert C. Martin. Essential reading for every software developer."
+  },
+  {
+    "id": 24, "name": "The Psychology of Money", "category": "Books",
+    "price": 16.99, "oldPrice": 22.99, "emoji": "💰",
+    "rating": 4.7, "reviews": 23456, "stock": 320,
+    "badge": "sale", "tags": ["Finance", "Morgan Housel", "Bestseller"],
+    "description": "Timeless lessons on wealth, greed, and happiness by Morgan Housel. Explores how people think about money in surprising ways."
+  }
+]

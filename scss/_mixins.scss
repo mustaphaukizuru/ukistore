@@ -1,0 +1,83 @@
+// ── Responsive ───────────────────────────────────
+@mixin sm  { @media (min-width: 576px)  { @content; } }
+@mixin md  { @media (min-width: 768px)  { @content; } }
+@mixin lg  { @media (min-width: 992px)  { @content; } }
+@mixin xl  { @media (min-width: 1200px) { @content; } }
+
+@mixin max-sm { @media (max-width: 575px)  { @content; } }
+@mixin max-md { @media (max-width: 767px)  { @content; } }
+@mixin max-lg { @media (max-width: 991px)  { @content; } }
+
+// ── Glass surface ─────────────────────────────────
+@mixin glass($alpha: 0.05) {
+  background: rgba(255,255,255,$alpha);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid $border;
+  border-radius: $r-lg;
+}
+
+// ── Flex helpers ──────────────────────────────────
+@mixin flex-center  { display:flex; align-items:center; justify-content:center; }
+@mixin flex-between { display:flex; align-items:center; justify-content:space-between; }
+@mixin flex-gap($g) { display:flex; align-items:center; gap:$g; }
+
+// ── Gradient text ─────────────────────────────────
+@mixin grad-text {
+  background: linear-gradient(135deg, $text 0%, $accent-3 50%, $accent 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// ── Card hover ────────────────────────────────────
+@mixin card-hover {
+  transition: transform $t-normal, border-color $t-normal, box-shadow $t-normal;
+  &:hover {
+    transform: translateY(-4px);
+    border-color: $border-hover;
+    box-shadow: 0 16px 48px rgba($accent, 0.15);
+  }
+}
+
+// ── Button base ───────────────────────────────────
+@mixin btn-base {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.65rem 1.5rem; border-radius: $r-md;
+  font-family: $font-body; font-size: 0.875rem; font-weight: 500;
+  cursor: pointer; transition: all $t-normal;
+  text-decoration: none; border: none; line-height: 1;
+}
+
+// ── Truncate ──────────────────────────────────────
+@mixin clamp($n: 2) {
+  overflow: hidden; display: -webkit-box;
+  -webkit-line-clamp: $n; -webkit-box-orient: vertical;
+}
+
+// ── Scrollbar ─────────────────────────────────────
+@mixin scrollbar {
+  &::-webkit-scrollbar { width: 4px; height: 4px; }
+  &::-webkit-scrollbar-track { background: $surface; }
+  &::-webkit-scrollbar-thumb { background: $accent; border-radius: 99px; }
+}
+
+// ── Input base ────────────────────────────────────
+@mixin input-base {
+  width: 100%; background: $surface; border: 1px solid $border;
+  border-radius: $r-md; padding: 0.7rem 1rem;
+  color: $text; font-family: $font-body; font-size: 0.875rem;
+  outline: none; transition: border-color $t-fast, box-shadow $t-fast;
+  &::placeholder { color: $text-dim; }
+  &:focus { border-color: $accent; box-shadow: 0 0 0 3px $accent-glow; }
+}
+
+// ── Badge ─────────────────────────────────────────
+@mixin badge($color) {
+  background: rgba($color, 0.12);
+  color: $color;
+  border: 1px solid rgba($color, 0.25);
+  font-size: 0.7rem; font-weight: 600;
+  padding: 0.2rem 0.6rem; border-radius: 99px;
+  letter-spacing: 0.04em;
+}
