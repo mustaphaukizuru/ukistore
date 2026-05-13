@@ -1,7 +1,7 @@
 // ── Navbar ────────────────────────────────────────
 .navbar-store {
   position: sticky; top: 0; z-index: 500;
-  background: rgba($brand-mint, 0.85);
+  background: rgba($brand-lavender, 0.82);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid $border;
@@ -14,8 +14,8 @@
     @include flex-gap(0.5rem); color: $text-strong;
     .brand-icon {
       width: 32px; height: 32px; border-radius: 9px;
-      background: linear-gradient(135deg, $accent 0%, $brand-gold 100%);
-      box-shadow: 0 4px 12px rgba($accent, 0.4);
+      background: linear-gradient(135deg, $brand-violet 0%, $brand-orchid 100%);
+      box-shadow: 0 4px 12px rgba($brand-violet, 0.45);
       @include flex-center; font-size: 1rem;
     }
   }

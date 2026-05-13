@@ -7,3 +7,6 @@ Thumbs.db
 
 # Claude Code per-user IDE state — keep `launch.json` tracked, ignore the rest
 .claude/settings.local.json
+
+# Local scratch dir (image conversions, debugging assets)
+tmp/
