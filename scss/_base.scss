@@ -69,18 +69,19 @@ input, select, textarea { font-family: $font-body; }
 
 // ── Rating stars ──────────────────────────────────
 .stars {
-  display: flex; gap: 2px; align-items: center;
-  .star { color: $warning; font-size: 0.8rem; }
-  .star.empty { color: $text-dim; }
+  display: inline-flex; gap: 2px; align-items: center;
+  .star { color: $brand-gold; font-size: 0.8rem; }
+  .star.empty { color: rgba($pure-white, 0.18); }
 }
 
-// ── Price styles ──────────────────────────────────
-.price-new { font-family: $font-heading; font-weight: 700; color: $text; }
-.price-old { font-size: 0.8rem; color: $text-muted; text-decoration: line-through; margin-left: 0.4rem; }
+// ── Price styles (used in cart drawer, quickview) ─
+.price-new { font-family: $font-heading; font-weight: 700; color: $text-strong; }
+.price-old { font-size: 0.8rem; color: $text-dim; text-decoration: line-through; margin-left: 0.4rem; }
 .price-badge {
-  font-size: 0.68rem; font-weight: 700; padding: 0.15rem 0.5rem;
-  background: rgba($danger, 0.15); color: $danger;
+  font-size: 0.68rem; font-weight: 800; padding: 0.18rem 0.5rem;
+  background: $accent; color: $on-accent;
   border-radius: 4px; margin-left: 0.4rem;
+  letter-spacing: 0.02em;
 }
 
 // ── Skeleton loader ───────────────────────────────
