@@ -41,9 +41,6 @@
   width: 100%;
   min-width: 0;
   background: $surface;
-  background-image:
-    linear-gradient(180deg, rgba($pure-white, 0.02) 0%, transparent 30%),
-    linear-gradient(180deg, transparent 70%, rgba($pure-black, 0.18) 100%);
   border: 1px solid $border;
   border-radius: $r-lg;
   overflow: hidden;
@@ -55,9 +52,9 @@
 
   &:hover {
     transform: translateY(-4px);
-    border-color: $border-hover;
-    box-shadow: $shadow-lg, $shadow-glow;
-    .card-media .media-glow { opacity: 1; transform: scale(1.05); }
+    border-color: $border-strong;
+    box-shadow: $shadow-lg;
+    .card-media .media-glow { opacity: 1; transform: scale(1.06); }
     .card-media .quick-view-btn { opacity: 1; transform: translateY(0); }
     .card-emoji { transform: scale(1.08) rotate(-3deg); }
   }
@@ -70,7 +67,8 @@
     aspect-ratio: 1 / 1;
     width: 100%;
     min-width: 0;
-    background: linear-gradient(135deg, $ink 0%, $surface 70%, $surface-2 100%);
+    // Soft warm cream-to-mint backdrop — subtle, premium, lets the product pop
+    background: linear-gradient(135deg, #FDF5EC 0%, #F9F4E8 50%, #F0F6EB 100%);
     overflow: hidden;
     cursor: pointer;
     @include flex-center;
@@ -79,29 +77,29 @@
       position: absolute;
       inset: 0;
       background: radial-gradient(circle at 50% 55%,
-        rgba($accent, 0.38) 0%,
-        rgba($accent-2, 0.14) 35%,
-        transparent 72%);
-      opacity: 0.7;
+        rgba($brand-orange, 0.22) 0%,
+        rgba($brand-gold, 0.18) 30%,
+        transparent 70%);
+      opacity: 0.55;
       transition: opacity $t-normal, transform $t-slow;
       pointer-events: none;
     }
 
-    // Top highlight (subtle white sheen)
+    // Subtle top sheen
     &::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; height: 50%;
-      background: linear-gradient(180deg, rgba($pure-white, 0.05) 0%, transparent 100%);
+      top: 0; left: 0; right: 0; height: 40%;
+      background: linear-gradient(180deg, rgba($pure-white, 0.5) 0%, transparent 100%);
       pointer-events: none;
       z-index: 1;
     }
 
-    // Vignette ring
+    // Soft inner ring — replaces the black vignette
     &::after {
       content: '';
       position: absolute; inset: 0;
-      box-shadow: inset 0 0 60px rgba($pure-black, 0.45);
+      box-shadow: inset 0 0 40px rgba($brand-indigo, 0.06);
       pointer-events: none;
     }
 
@@ -109,7 +107,7 @@
       position: relative;
       font-size: clamp(2.6rem, 14vw, 5.2rem);
       line-height: 1;
-      filter: drop-shadow(0 10px 18px rgba($pure-black, 0.55));
+      filter: drop-shadow(0 6px 12px rgba($brand-indigo, 0.18));
       transition: transform $t-slow cubic-bezier(.34, 1.56, .64, 1);
       z-index: 2;
       user-select: none;
@@ -118,24 +116,25 @@
     .quick-view-btn {
       position: absolute;
       bottom: 0.6rem; left: 0.6rem; right: 0.6rem;
-      padding: 0.5rem 0.75rem;
-      background: rgba($ink, 0.85);
+      padding: 0.55rem 0.75rem;
+      background: rgba($pure-white, 0.92);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba($pure-white, 0.15);
+      border: 1px solid $border-strong;
       border-radius: $r-md;
-      color: $pure-white;
+      color: $text;
       font-size: 0.74rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.02em;
       cursor: pointer;
       opacity: 0;
       transform: translateY(8px);
-      transition: opacity $t-normal, transform $t-normal, background $t-fast, border-color $t-fast;
+      transition: opacity $t-normal, transform $t-normal, background $t-fast, color $t-fast, border-color $t-fast;
       z-index: 3;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      box-shadow: 0 4px 12px rgba($brand-indigo, 0.12);
       &:hover { background: $accent; border-color: $accent; color: $on-accent; }
       @media (hover: none) { opacity: 1; transform: translateY(0); }
     }
@@ -148,7 +147,7 @@
     display: flex; flex-direction: column; align-items: flex-start;
     gap: 0.3rem;
     z-index: 4;
-    max-width: calc(100% - 4rem); // never collide with wish-btn (40px + gutter)
+    max-width: calc(100% - 4rem);
   }
 
   .wish-btn {
@@ -156,19 +155,20 @@
     top: 0.6rem; right: 0.6rem;
     width: 34px; height: 34px;
     border-radius: 50%;
-    background: rgba($ink, 0.75);
+    background: rgba($pure-white, 0.9);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba($pure-white, 0.14);
-    color: $pure-white;
+    border: 1px solid $border-strong;
+    color: $text-muted;
     font-size: 1rem;
     line-height: 1;
     cursor: pointer;
     transition: all $t-fast;
     @include flex-center;
     z-index: 4;
+    box-shadow: 0 2px 6px rgba($brand-indigo, 0.08);
     &:hover { background: $accent; border-color: $accent; color: $on-accent; transform: scale(1.08); }
-    &.active { color: $accent; background: rgba($accent, 0.2); border-color: $accent; }
+    &.active { color: $accent; background: $pure-white; border-color: $accent; }
     &.active:hover { background: $accent; color: $on-accent; }
   }
 
@@ -192,15 +192,22 @@
   }
 
   .card-category {
-    font-size: 0.65rem;
-    font-weight: 700;
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: $accent-2;
+    color: $brand-indigo;             // 15:1 on the chip — easily passes AA
+    background: rgba($accent, 0.13);
+    padding: 0.22rem 0.5rem;
+    border-radius: 5px;
+    border: 1px solid rgba($accent, 0.2);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 100%;
     min-width: 0;
+    line-height: 1.2;
   }
 
   .card-rating-inline {
@@ -209,7 +216,7 @@
     color: $text-muted;
     white-space: nowrap;
     flex-shrink: 0;
-    .star-icon { color: $accent-2; font-size: 0.78rem; }
+    .star-icon { color: $brand-gold; font-size: 0.78rem; filter: drop-shadow(0 0 1px rgba($warning, 0.4)); }
     .rating-num { color: $text-strong; font-weight: 700; }
   }
 
@@ -225,7 +232,7 @@
     margin: 0;
     word-break: break-word;
     overflow-wrap: anywhere;
-    &:hover { color: $accent-2; }
+    &:hover { color: $accent; }
 
     @include sm { font-size: 0.95rem; }
   }
@@ -272,9 +279,10 @@
     display: inline-flex; align-items: center; gap: 0.3rem;
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    &.in  { color: $success; background: rgba($success, 0.12); }
-    &.low { color: $brand-gold; background: rgba($brand-gold, 0.15); }
-    &.out { color: $danger;  background: rgba($danger, 0.15); }
+    border: 1px solid transparent;
+    &.in  { color: $success; background: rgba($success, 0.14); border-color: rgba($success, 0.35); }
+    &.low { color: $warning; background: rgba($warning, 0.16); border-color: rgba($warning, 0.4); }
+    &.out { color: $danger;  background: rgba($danger, 0.13); border-color: rgba($danger, 0.35); }
   }
 
   // ── Footer / CTA ────────────────────────────────
@@ -330,15 +338,16 @@
   font-size: 0.65rem;
   font-weight: 800;
   letter-spacing: 0.06em;
-  padding: 0.22rem 0.55rem;
+  padding: 0.25rem 0.55rem;
   border-radius: 5px;
   text-transform: uppercase;
   line-height: 1;
+  box-shadow: 0 2px 6px rgba($brand-indigo, 0.15);
 }
-.badge-new  { background: $success;     color: $brand-indigo; }
+.badge-new  { background: $success;     color: $pure-white; }
 .badge-hot  { background: $brand-gold;  color: $brand-indigo; }
 .badge-sale { background: $accent;      color: $on-accent; }
-.badge-out  { background: rgba($text-muted, 0.2); color: $text-muted; border: 1px solid rgba($text-muted, 0.3); }
+.badge-out  { background: $surface; color: $text-muted; border: 1px solid $border-strong; box-shadow: none; }
 
 // ── Category Pill ─────────────────────────────────
 .cat-pill {
@@ -346,7 +355,7 @@
   font-size: 0.8rem; font-weight: 600;
   padding: 0.5rem 1rem;
   border-radius: 99px;
-  border: 1px solid $border;
+  border: 1px solid $border-strong;
   background: $surface;
   color: $text;
   cursor: pointer;
@@ -355,18 +364,18 @@
   scroll-snap-align: start;
   .cat-count {
     font-size: 0.7rem;
-    color: $text-dim;
-    background: rgba($pure-black, 0.25);
-    padding: 0.05rem 0.4rem;
+    color: $text-muted;
+    background: rgba($brand-indigo, 0.08);
+    padding: 0.05rem 0.45rem;
     border-radius: 99px;
     font-weight: 700;
   }
 
   &:hover {
-    border-color: $accent-2;
-    background: rgba($accent-2, 0.08);
+    border-color: $accent;
+    background: rgba($accent, 0.06);
     color: $text-strong;
-    .cat-count { color: $accent-2; background: rgba($pure-black, 0.4); }
+    .cat-count { color: $accent; background: rgba($accent, 0.12); }
   }
   &.active {
     background: $accent;
@@ -388,14 +397,14 @@
   @include scrollbar;
 
   .filter-section {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba($pure-white, 0.06);
+    margin-bottom: 1.4rem;
+    padding-bottom: 1.4rem;
+    border-bottom: 1px solid $border;
     &:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
   }
   .filter-title {
     font-size: 0.75rem; font-weight: 800; text-transform: uppercase;
-    letter-spacing: 0.12em; color: $text; margin-bottom: 0.875rem;
+    letter-spacing: 0.12em; color: $text-strong; margin-bottom: 0.875rem;
     @include flex-between;
     .filter-clear { font-size: 0.7rem; text-transform: none; letter-spacing: 0; color: $accent; cursor: pointer; font-weight: 600;
       &:hover { text-decoration: underline; }
@@ -413,7 +422,7 @@
       color: $text-muted;
       margin-top: 0.5rem;
       font-variant-numeric: tabular-nums;
-      span:last-child { color: $accent-2; font-weight: 700; }
+      span:last-child { color: $accent; font-weight: 700; }
     }
   }
 
@@ -423,7 +432,7 @@
     font-size: 0.875rem; color: $text;
     transition: color $t-fast;
     min-height: 32px;
-    &:hover { color: $accent-2; }
+    &:hover { color: $accent; }
     input[type=checkbox] {
       accent-color: $accent;
       width: 16px; height: 16px;
@@ -432,15 +441,16 @@
     }
     .check-count {
       margin-left: auto;
-      font-size: 0.72rem; font-weight: 600;
-      color: $text-dim;
-      background: rgba($pure-black, 0.25);
+      font-size: 0.72rem; font-weight: 700;
+      color: $text-muted;
+      background: rgba($brand-indigo, 0.06);
       padding: 0.1rem 0.45rem;
       border-radius: 99px;
     }
     &:has(input:checked) {
-      color: $accent-2;
-      .check-count { color: $accent-2; background: rgba($accent, 0.15); }
+      color: $accent;
+      font-weight: 600;
+      .check-count { color: $accent; background: rgba($accent, 0.13); }
     }
   }
 
@@ -454,11 +464,11 @@
       transition: background $t-fast, color $t-fast;
       font-size: 0.825rem;
       color: $text-muted;
-      &:hover { background: rgba($accent-2, 0.08); color: $text; }
+      &:hover { background: rgba($accent, 0.06); color: $text-strong; }
       &.active {
-        background: rgba($accent, 0.15);
-        color: $accent-2;
-        font-weight: 600;
+        background: rgba($accent, 0.12);
+        color: $accent;
+        font-weight: 700;
       }
     }
   }
@@ -495,12 +505,12 @@
     color: $text;
     min-width: 140px;
     appearance: none;
-    background-image: linear-gradient(45deg, transparent 50%, $accent-2 50%),
-                      linear-gradient(135deg, $accent-2 50%, transparent 50%);
+    background-image: linear-gradient(45deg, transparent 50%, $accent 50%),
+                      linear-gradient(135deg, $accent 50%, transparent 50%);
     background-position: calc(100% - 14px) 50%, calc(100% - 9px) 50%;
     background-size: 5px 5px;
     background-repeat: no-repeat;
-    option { background: $bg-2; color: $text; }
+    option { background: $surface; color: $text; }
     &:focus { border-color: $accent; box-shadow: 0 0 0 3px $accent-glow; }
   }
 
@@ -521,7 +531,7 @@
       cursor: pointer;
       transition: all $t-fast;
       font-size: 0.9rem;
-      &:hover { color: $text; background: rgba($pure-white, 0.05); }
+      &:hover { color: $text-strong; background: rgba($brand-indigo, 0.06); }
       &.active { background: $accent; color: $on-accent; }
     }
   }

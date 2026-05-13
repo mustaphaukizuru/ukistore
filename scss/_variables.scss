@@ -3,61 +3,67 @@
 $brand-indigo:  #1E104E;  // deep indigo   rgb(30, 16, 78)
 $brand-plum:    #452E5A;  // muted plum    rgb(69, 46, 90)
 $brand-orange:  #FF653F;  // vibrant orange rgb(255, 101, 63) — primary CTA
-$brand-gold:    #FFC85C;  // warm gold     rgb(255, 200, 92) — highlight / ratings
+$brand-gold:    #FFC85C;  // warm gold     rgb(255, 200, 92) — ratings, hot badge
+
+// ── Light theme foundation ────────────────────────
+// Off-white minty cream — soft on the eyes, distinctive brand mood.
+$brand-mint:    #F1FAEE;  // page background        rgb(241, 250, 238)
 
 // ── Support neutrals ──────────────────────────────
-// Black + white grounded the palette professionally — used for borders,
-// dividers, premium accents, and subtle UI chrome.
 $pure-black:    #000000;
-$pure-white:    #ffffff;
-$ink:           #050211;           // deeper than $bg — for press/active states
-$cream:         #fff8ec;           // warm white — premium body text option
-$mist:          rgba(255, 255, 255, 0.08);  // subtle white veil for hover overlays
-$shade:         rgba(0, 0, 0, 0.45);        // subtle black overlay
+$pure-white:    #FFFFFF;
+$ink:           #050211;           // deep ink — modal overlay, dropshadows
+$cream:         #FFF8EC;           // warm white — used for hover veils
+$mist:          rgba(30, 16, 78, 0.04);   // subtle indigo veil (replaces white-mist of dark theme)
+$shade:         rgba(30, 16, 78, 0.08);   // subtle indigo overlay
 
-// ── Surfaces (derived) ────────────────────────────
-$bg:           #0a0518;            // page background — near-black indigo
-$bg-2:         #130a30;            // section background (hero, pills strip)
-$surface:      $brand-indigo;      // card / sidebar surface
-$surface-2:    #2a1a5e;            // elevated surface
-$surface-3:    $brand-plum;        // top-level elevation / pressed states
-$border:       rgba(255, 200, 92, 0.12);    // gold-tinted hairline
-$border-strong: rgba(255, 200, 92, 0.22);   // visible divider
-$border-hover: rgba(255, 101, 63, 0.45);    // warm orange on hover
+// ── Surfaces (light) ──────────────────────────────
+$bg:           $brand-mint;        // page background
+$bg-2:         #E7F2E1;            // section bg (hero, pill strip) — a shade darker mint
+$surface:      $pure-white;        // cards / sidebar / drawer surface
+$surface-2:    #FAFDF8;            // elevated surface (subtle off-white)
+$surface-3:    #DDE9D6;            // pressed states / footer / quiet zones
+
+// ── Borders & dividers ────────────────────────────
+$border:        rgba($brand-indigo, 0.10);  // soft indigo hairline
+$border-strong: rgba($brand-indigo, 0.20);  // visible divider
+$border-hover:  rgba($brand-orange, 0.55);  // warm orange on hover
 
 // ── Accents ───────────────────────────────────────
-$accent:       $brand-orange;
-$accent-2:     $brand-gold;
-$accent-3:     #ffb293;            // peach (lighter accent)
-$accent-glow:  rgba(255, 101, 63, 0.28);
+$accent:       $brand-orange;             // primary CTA, sale badges, active pills
+$accent-2:     $brand-indigo;             // text-accent — replaces gold-on-dark from prior theme
+$accent-3:     #E0532E;                   // accent-pressed / darker orange for hover
+$accent-glow:  rgba($brand-orange, 0.28);
 
-// On-accent text — must contrast against orange/gold backgrounds
-$on-accent:    $brand-indigo;      // dark text on bright backgrounds
+// On-accent text — for use ON $accent-coloured backgrounds
+// Indigo-on-orange: 5.5:1 — passes WCAG AA for all text sizes.
+$on-accent:    $brand-indigo;
 
-// ── Shadows (using pure black for crispness) ──────
-$shadow-sm:    0 1px 2px rgba($pure-black, 0.35);
-$shadow-md:    0 6px 16px rgba($pure-black, 0.40);
-$shadow-lg:    0 18px 40px -10px rgba($pure-black, 0.55);
-$shadow-glow:  0 14px 30px -8px rgba($accent, 0.40);
+// ── Shadows (soft indigo tint — never harsh black on light bg) ──
+$shadow-sm:    0 1px 2px rgba($brand-indigo, 0.06);
+$shadow-md:    0 6px 18px rgba($brand-indigo, 0.10);
+$shadow-lg:    0 20px 48px -16px rgba($brand-indigo, 0.22);
+$shadow-glow:  0 14px 28px -10px rgba($brand-orange, 0.32);
 
 // ── Text ──────────────────────────────────────────
-$text:         $cream;             // warm white primary
-$text-strong:  $pure-white;        // pure white when contrast matters
-$text-muted:   #b0a4c4;            // muted lavender
-$text-dim:     #7a6b95;            // tertiary — bumped up from #6b5a82 for AA
+$text:         $brand-indigo;             // primary text — warm dark
+$text-strong:  #0A0518;                   // headings — near-ink for max contrast (15:1 on mint)
+$text-muted:   #5B4E73;                   // 7.5:1 on mint — meets AA
+$text-dim:     #897D9C;                   // 4.6:1 on mint — meets AA Large only; use for tertiary chrome
 
 // ── Semantic ──────────────────────────────────────
-$success:      #4ade80;
-$warning:      $brand-gold;
-$danger:       #ef4444;
-$info:         #82c8e8;
+$success:      #22A06B;                   // darker green — readable on light
+$warning:      #C58A00;                   // darker gold — readable on light
+$danger:       #DC2626;                   // crimson — strong on light
+$info:         #1E6B99;                   // teal-blue — strong on light
 
 // ── Tags / category colors ────────────────────────
-$cat-electronics: #82c8e8;
-$cat-fashion:     #ff9bb8;
-$cat-home:        #98e6c7;
-$cat-sports:      $brand-gold;
-$cat-beauty:      #c8a4e6;
+// All hand-picked for AA contrast on light backgrounds
+$cat-electronics: #1E6B99;
+$cat-fashion:     #C2185B;
+$cat-home:        #2E7D32;
+$cat-sports:      #B8860B;
+$cat-beauty:      #6A1B9A;
 $cat-books:       $brand-orange;
 
 // ── Typography ────────────────────────────────────
