@@ -1,7 +1,7 @@
 // ── Cart Drawer ───────────────────────────────────
 .cart-overlay {
   position: fixed; inset: 0;
-  background: rgba($brand-indigo, 0.45);
+  background: rgba($brand-violet, 0.40);
   z-index: 900; opacity: 0; pointer-events: none;
   transition: opacity $t-normal;
   backdrop-filter: blur(6px);
@@ -14,7 +14,7 @@
   width: min(420px, 100vw);
   background: $surface;
   border-left: 1px solid $border;
-  box-shadow: -20px 0 60px rgba($brand-indigo, 0.18);
+  box-shadow: -20px 0 60px rgba($brand-violet, 0.22);
   z-index: 901; display: flex; flex-direction: column;
   transform: translateX(100%);
   transition: transform $t-slow cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -43,11 +43,11 @@
 
     .item-thumb {
       width: 70px; height: 70px; flex-shrink: 0;
-      background: linear-gradient(135deg, #FDF5EC 0%, #F0F6EB 100%);
+      background: linear-gradient(135deg, #F5F0FF 0%, #F8E8FA 100%);
       border-radius: $r-md;
       @include flex-center; font-size: 2rem;
       border: 1px solid $border;
-      filter: drop-shadow(0 2px 4px rgba($brand-indigo, 0.1));
+      filter: drop-shadow(0 2px 4px rgba($brand-violet, 0.15));
     }
     .item-info { flex: 1; min-width: 0;
       .item-name { font-size: 0.875rem; font-weight: 500; @include clamp(2); margin-bottom: 0.3rem; }
@@ -102,7 +102,7 @@
 // ── Modal Overlay (shared) ────────────────────────
 .modal-overlay {
   position: fixed; inset: 0;
-  background: rgba($brand-indigo, 0.48);
+  background: rgba($brand-violet, 0.45);
   z-index: 1000;
   display: flex; align-items: center; justify-content: center;
   padding: 1rem;
@@ -163,7 +163,7 @@
     }
     .step-label { font-size: 0.72rem; color: $text-muted; }
     &.active .step-dot { background: $accent; border-color: $accent; color: $on-accent; }
-    &.done .step-dot   { background: $success; border-color: $success; color: $brand-indigo; }
+    &.done .step-dot   { background: $success; border-color: $success; color: $pure-white; }
     &.active .step-label, &.done .step-label { color: $text; }
   }
 
@@ -223,9 +223,9 @@
     @include max-md { grid-template-columns: 1fr; }
   }
   .qv-thumb {
-    background: linear-gradient(135deg, #FDF5EC 0%, #F9F4E8 50%, #F0F6EB 100%);
+    background: linear-gradient(135deg, #F5F0FF 0%, #FAF6FE 50%, #F8E8FA 100%);
     @include flex-center; font-size: 8rem;
-    filter: drop-shadow(0 6px 12px rgba($brand-indigo, 0.12));
+    filter: drop-shadow(0 6px 12px rgba($brand-violet, 0.18));
     border-radius: $r-xl 0 0 $r-xl; min-height: 320px;
     @include max-md { border-radius: $r-xl $r-xl 0 0; min-height: 200px; }
   }
@@ -269,8 +269,8 @@
   &::before {
     content: ''; position: absolute; inset: 0;
     background:
-      radial-gradient(ellipse 55% 75% at 80% 35%, rgba($accent, 0.18), transparent 60%),
-      radial-gradient(ellipse 45% 60% at 20% 75%, rgba($brand-gold, 0.18), transparent 70%);
+      radial-gradient(ellipse 55% 75% at 80% 35%, rgba($brand-violet, 0.18), transparent 60%),
+      radial-gradient(ellipse 45% 60% at 20% 75%, rgba($brand-orchid, 0.22), transparent 70%);
     pointer-events: none;
   }
   .hero-content { position: relative; z-index: 2; }
@@ -302,7 +302,7 @@
   .hero-icon {
     font-size: 12rem; line-height: 1;
     animation: float 4s ease-in-out infinite;
-    filter: drop-shadow(0 25px 40px rgba($brand-indigo, 0.18));
+    filter: drop-shadow(0 25px 40px rgba($brand-violet, 0.30));
   }
   .hero-floater {
     position: absolute;
@@ -415,7 +415,7 @@
 
 // ── Mobile Filter Sheet ───────────────────────────
 .filter-sheet-overlay {
-  position: fixed; inset: 0; background: rgba($brand-indigo, 0.45);
+  position: fixed; inset: 0; background: rgba($brand-violet, 0.42);
   z-index: 950; opacity: 0; pointer-events: none;
   transition: opacity $t-normal; backdrop-filter: blur(6px);
   &.open { opacity: 1; pointer-events: all; }
@@ -432,7 +432,7 @@
   display: flex; flex-direction: column;
   transform: translateY(100%);
   transition: transform $t-slow cubic-bezier(0.25,0.46,0.45,0.94);
-  box-shadow: 0 -20px 60px rgba($brand-indigo, 0.18);
+  box-shadow: 0 -20px 60px rgba($brand-violet, 0.22);
   &.open { transform: translateY(0); }
   @include lg { display: none !important; }
 
