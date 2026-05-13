@@ -1,32 +1,50 @@
 // ── Brand palette ─────────────────────────────────
 // Source colors — single source of truth
-$brand-indigo:  #1E104E;  // deep indigo  rgb(30, 16, 78)
-$brand-plum:    #452E5A;  // muted plum   rgb(69, 46, 90)
+$brand-indigo:  #1E104E;  // deep indigo   rgb(30, 16, 78)
+$brand-plum:    #452E5A;  // muted plum    rgb(69, 46, 90)
 $brand-orange:  #FF653F;  // vibrant orange rgb(255, 101, 63) — primary CTA
-$brand-gold:    #FFC85C;  // warm gold    rgb(255, 200, 92) — highlight / ratings
+$brand-gold:    #FFC85C;  // warm gold     rgb(255, 200, 92) — highlight / ratings
+
+// ── Support neutrals ──────────────────────────────
+// Black + white grounded the palette professionally — used for borders,
+// dividers, premium accents, and subtle UI chrome.
+$pure-black:    #000000;
+$pure-white:    #ffffff;
+$ink:           #050211;           // deeper than $bg — for press/active states
+$cream:         #fff8ec;           // warm white — premium body text option
+$mist:          rgba(255, 255, 255, 0.08);  // subtle white veil for hover overlays
+$shade:         rgba(0, 0, 0, 0.45);        // subtle black overlay
 
 // ── Surfaces (derived) ────────────────────────────
-$bg:           #0a0518;            // deepest — page background
-$bg-2:         #130a30;            // section background
+$bg:           #0a0518;            // page background — near-black indigo
+$bg-2:         #130a30;            // section background (hero, pills strip)
 $surface:      $brand-indigo;      // card / sidebar surface
 $surface-2:    #2a1a5e;            // elevated surface
 $surface-3:    $brand-plum;        // top-level elevation / pressed states
-$border:       rgba(255, 200, 92, 0.10);   // gold-tinted border
-$border-hover: rgba(255, 101, 63, 0.40);   // warm orange on hover
+$border:       rgba(255, 200, 92, 0.12);    // gold-tinted hairline
+$border-strong: rgba(255, 200, 92, 0.22);   // visible divider
+$border-hover: rgba(255, 101, 63, 0.45);    // warm orange on hover
 
 // ── Accents ───────────────────────────────────────
 $accent:       $brand-orange;
 $accent-2:     $brand-gold;
 $accent-3:     #ffb293;            // peach (lighter accent)
-$accent-glow:  rgba(255, 101, 63, 0.25);
+$accent-glow:  rgba(255, 101, 63, 0.28);
 
 // On-accent text — must contrast against orange/gold backgrounds
 $on-accent:    $brand-indigo;      // dark text on bright backgrounds
 
+// ── Shadows (using pure black for crispness) ──────
+$shadow-sm:    0 1px 2px rgba($pure-black, 0.35);
+$shadow-md:    0 6px 16px rgba($pure-black, 0.40);
+$shadow-lg:    0 18px 40px -10px rgba($pure-black, 0.55);
+$shadow-glow:  0 14px 30px -8px rgba($accent, 0.40);
+
 // ── Text ──────────────────────────────────────────
-$text:         #fff5e6;            // warm white
+$text:         $cream;             // warm white primary
+$text-strong:  $pure-white;        // pure white when contrast matters
 $text-muted:   #b0a4c4;            // muted lavender
-$text-dim:     #6b5a82;            // tertiary
+$text-dim:     #7a6b95;            // tertiary — bumped up from #6b5a82 for AA
 
 // ── Semantic ──────────────────────────────────────
 $success:      #4ade80;

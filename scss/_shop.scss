@@ -1,19 +1,25 @@
 // ── Cart Drawer ───────────────────────────────────
 .cart-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.65);
+  position: fixed; inset: 0;
+  background: rgba($pure-black, 0.7);
   z-index: 900; opacity: 0; pointer-events: none;
   transition: opacity $t-normal;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   &.open { opacity: 1; pointer-events: all; }
 }
 
 .cart-drawer {
   position: fixed; top: 0; right: 0; bottom: 0;
   width: min(420px, 100vw);
-  background: $bg-2; border-left: 1px solid $border;
+  background: $bg-2;
+  border-left: 1px solid $border-strong;
+  box-shadow: -20px 0 60px rgba($pure-black, 0.5);
   z-index: 901; display: flex; flex-direction: column;
-  transform: translateX(100%); transition: transform $t-slow cubic-bezier(0.25,0.46,0.45,0.94);
+  transform: translateX(100%);
+  transition: transform $t-slow cubic-bezier(0.25, 0.46, 0.45, 0.94);
   &.open { transform: translateX(0); }
+  @include max-sm { width: 100vw; }
 
   .cart-header {
     @include flex-between; padding: 1.25rem 1.5rem;
@@ -67,7 +73,10 @@
   }
 
   .cart-footer {
-    border-top: 1px solid $border; padding: 1.25rem 1.5rem; flex-shrink: 0;
+    border-top: 1px solid $border-strong;
+    padding: 1.25rem 1.5rem;
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+    flex-shrink: 0;
     background: $surface;
     .subtotal { @include flex-between; margin-bottom: 0.5rem;
       .sub-label { font-size: 0.875rem; color: $text-muted; }
@@ -87,21 +96,36 @@
   }
 }
 
-// ── Checkout Modal ────────────────────────────────
+// ── Modal Overlay (shared) ────────────────────────
 .modal-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-  z-index: 1000; display: flex; align-items: center; justify-content: center;
-  padding: 1rem; opacity: 0; pointer-events: none;
-  transition: opacity $t-normal; backdrop-filter: blur(6px);
+  position: fixed; inset: 0;
+  background: rgba($pure-black, 0.72);
+  z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity $t-normal;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   &.open { opacity: 1; pointer-events: all; }
+  @include max-sm { padding: 0.5rem; align-items: flex-end; }
 }
 
+// ── Checkout Modal ────────────────────────────────
 .checkout-modal {
-  background: $bg-2; border: 1px solid $border;
-  border-radius: $r-xl; width: 100%; max-width: 680px;
-  max-height: 90vh; overflow-y: auto; @include scrollbar;
+  background: $bg-2;
+  border: 1px solid $border-strong;
+  border-radius: $r-xl;
+  width: 100%; max-width: 680px;
+  max-height: 90vh; overflow-y: auto;
+  box-shadow: $shadow-lg;
+  @include scrollbar;
   transform: scale(0.95); transition: transform $t-normal;
   .modal-overlay.open & { transform: scale(1); }
+  @include max-sm {
+    max-height: 95vh;
+    border-radius: $r-xl $r-xl 0 0;
+  }
 
   .modal-header {
     @include flex-between; padding: 1.5rem 2rem;
@@ -115,7 +139,9 @@
     }
   }
 
-  .modal-body { padding: 2rem; }
+  .modal-body { padding: 2rem;
+    @include max-sm { padding: 1.25rem; }
+  }
 
   // Steps
   .steps { @include flex-gap(0); margin-bottom: 2rem; }
@@ -178,9 +204,17 @@
 
 // ── Product Quick View ────────────────────────────
 .quickview-modal {
-  background: $bg-2; border: 1px solid $border;
-  border-radius: $r-xl; width: 100%; max-width: 820px;
-  max-height: 90vh; overflow-y: auto; @include scrollbar;
+  background: $bg-2;
+  border: 1px solid $border-strong;
+  border-radius: $r-xl;
+  width: 100%; max-width: 820px;
+  max-height: 90vh; overflow-y: auto;
+  box-shadow: $shadow-lg;
+  @include scrollbar;
+  @include max-sm {
+    max-height: 95vh;
+    border-radius: $r-xl $r-xl 0 0;
+  }
 
   .qv-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0;
     @include max-md { grid-template-columns: 1fr; }
@@ -191,8 +225,9 @@
     @include max-md { border-radius: $r-xl $r-xl 0 0; min-height: 200px; }
   }
   .qv-info { padding: 2rem;
-    .qv-cat { font-size: 0.75rem; color: $accent-2; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
-    h2 { font-size: 1.3rem; margin-bottom: 0.75rem; }
+    @include max-sm { padding: 1.25rem; }
+    .qv-cat { font-size: 0.72rem; color: $accent-2; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; font-weight: 700; }
+    h2 { font-size: clamp(1.1rem, 4vw, 1.4rem); margin-bottom: 0.75rem; color: $text-strong; }
     .qv-price { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.75rem; @include flex-gap(0.5rem); align-items: baseline; }
     .qv-desc { font-size: 0.875rem; color: $text-muted; margin-bottom: 1.25rem; line-height: 1.7; }
     .qv-stock { font-size: 0.8rem; margin-bottom: 1.25rem;
@@ -224,7 +259,7 @@
 .store-hero {
   position: relative; overflow: hidden;
   background: $bg-2; border-bottom: 1px solid $border;
-  padding: 3rem 0;
+  padding: clamp(2rem, 5vw, 3rem) 0;
   &::before {
     content: ''; position: absolute; inset: 0;
     background:

@@ -7,6 +7,7 @@
   border-bottom: 1px solid $border;
   padding: 0.875rem 0;
   transition: all $t-normal;
+  @include max-sm { padding: 0.7rem 0; }
 
   .brand {
     font-family: $font-heading; font-weight: 800; font-size: 1.3rem;
@@ -48,9 +49,10 @@
     position: relative;
     width: 40px; height: 40px; border-radius: $r-md;
     background: $surface; border: 1px solid $border;
-    @include flex-center; cursor: pointer; color: $text-muted;
-    transition: all $t-fast; font-size: 1rem;
-    &:hover { border-color: $accent; color: $accent; background: rgba($accent, 0.08); }
+    @include flex-center; cursor: pointer; color: $text;
+    transition: all $t-fast; font-size: 1rem; flex-shrink: 0;
+    &:hover { border-color: $accent; color: $accent; background: rgba($accent, 0.1); }
+    @include max-sm { width: 38px; height: 38px; }
 
     .badge-count {
       position: absolute; top: -5px; right: -5px;
