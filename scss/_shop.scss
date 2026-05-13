@@ -76,9 +76,9 @@
     .shipping-note { font-size: 0.75rem; color: $text-muted; text-align: center; margin-bottom: 1rem;
       span { color: $success; font-weight: 500; }
     }
-    .checkout-btn { @include btn-base; background: $accent; color: #fff; width: 100%;
+    .checkout-btn { @include btn-base; background: $accent; color: $on-accent; font-weight: 700; width: 100%;
       justify-content: center; font-size: 0.95rem; padding: 0.875rem;
-      &:hover { background: lighten($accent, 8%); box-shadow: 0 8px 24px rgba($accent, 0.4); transform: translateY(-2px); }
+      &:hover { background: $accent-3; box-shadow: 0 10px 28px rgba($accent, 0.45); transform: translateY(-2px); }
     }
     .continue-btn { @include btn-base; background: transparent; color: $text-muted; width: 100%;
       justify-content: center; margin-top: 0.5rem; font-size: 0.82rem;
@@ -133,8 +133,8 @@
       position: relative; z-index: 1; transition: all $t-normal;
     }
     .step-label { font-size: 0.72rem; color: $text-muted; }
-    &.active .step-dot { background: $accent; border-color: $accent; color: #fff; }
-    &.done .step-dot   { background: $success; border-color: $success; color: #fff; }
+    &.active .step-dot { background: $accent; border-color: $accent; color: $on-accent; }
+    &.done .step-dot   { background: $success; border-color: $success; color: $brand-indigo; }
     &.active .step-label, &.done .step-label { color: $text; }
   }
 
@@ -167,11 +167,11 @@
   }
 
   .modal-actions { @include flex-between; gap: 0.75rem; margin-top: 1.5rem;
-    .btn-next { @include btn-base; background: $accent; color: #fff;
-      &:hover { background: lighten($accent, 8%); }
+    .btn-next { @include btn-base; background: $accent; color: $on-accent; font-weight: 700;
+      &:hover { background: $accent-3; box-shadow: 0 6px 18px rgba($accent, 0.4); }
     }
     .btn-back { @include btn-base; background: $surface; color: $text-muted; border: 1px solid $border;
-      &:hover { color: $text; }
+      &:hover { color: $text; border-color: $accent; }
     }
   }
 }
@@ -208,9 +208,9 @@
         span { font-size: 1rem; font-weight: 700; min-width: 32px; text-align: center; }
       }
     }
-    .qv-add { @include btn-base; background: $accent; color: #fff; width: 100%; justify-content: center;
-      font-size: 0.95rem; padding: 0.875rem;
-      &:hover { background: lighten($accent, 8%); box-shadow: 0 6px 20px rgba($accent, 0.35); }
+    .qv-add { @include btn-base; background: $accent; color: $on-accent; font-weight: 700;
+      width: 100%; justify-content: center; font-size: 0.95rem; padding: 0.875rem;
+      &:hover { background: $accent-3; box-shadow: 0 8px 24px rgba($accent, 0.45); }
     }
     .qv-tags { @include flex-gap(0.4rem); flex-wrap: wrap; margin-top: 1rem;
       span { font-size: 0.72rem; padding: 0.2rem 0.6rem; background: $surface-2;
@@ -227,17 +227,84 @@
   padding: 3rem 0;
   &::before {
     content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba($accent, 0.15), transparent);
+    background:
+      radial-gradient(ellipse 50% 70% at 75% 40%, rgba($accent, 0.22), transparent 60%),
+      radial-gradient(ellipse 40% 60% at 30% 70%, rgba($accent-2, 0.10), transparent 70%);
+    pointer-events: none;
   }
   .hero-content { position: relative; z-index: 2; }
-  .hero-tag { @include badge($accent); margin-bottom: 1rem; display: inline-block; }
-  h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+  .hero-tag {
+    display: inline-block; margin-bottom: 1rem;
+    font-size: 0.72rem; font-weight: 700;
+    padding: 0.3rem 0.75rem; border-radius: 99px;
+    background: rgba($accent, 0.15);
+    color: $accent;
+    border: 1px solid rgba($accent, 0.3);
+    letter-spacing: 0.04em;
+  }
+  h1 { font-size: clamp(1.75rem, 5vw, 3rem); margin-bottom: 1rem; }
   p  { font-size: 1.05rem; color: $text-muted; max-width: 480px; }
-  .hero-actions { @include flex-gap(0.75rem); margin-top: 1.75rem; flex-wrap: wrap; }
-  .hero-stats { @include flex-gap(2rem); margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid $border;
-    .hstat { .hnum { font-family: $font-heading; font-size: 1.6rem; font-weight: 800; @include grad-text; }
+  .hero-actions { display: flex; align-items: center; gap: 0.75rem; margin-top: 1.75rem; flex-wrap: wrap; }
+  .hero-stats {
+    display: flex; gap: clamp(1rem, 4vw, 2rem);
+    flex-wrap: wrap;
+    margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid $border;
+    .hstat { .hnum { font-family: $font-heading; font-size: clamp(1.4rem, 4vw, 1.6rem); font-weight: 800; @include grad-text; }
       .hlbl { font-size: 0.75rem; color: $text-muted; }
     }
+  }
+
+  // ── Illustration column ────────────────────────
+  .hero-illustration {
+    position: relative;
+  }
+  .hero-icon {
+    font-size: 12rem; line-height: 1;
+    animation: float 4s ease-in-out infinite;
+    filter: drop-shadow(0 30px 40px rgba($accent, 0.35));
+  }
+  .hero-floater {
+    position: absolute;
+    background: $surface;
+    border: 1px solid rgba($accent-2, 0.30);
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 12px 30px rgba($brand-indigo, 0.5);
+    color: $text;
+    &-1 { top: 10px;   right: -20px; animation: float 5s ease-in-out infinite 0.5s; }
+    &-2 { bottom: 20px; left: -30px; animation: float 6s ease-in-out infinite 1s; }
+  }
+}
+
+// ── Category Pills Strip ──────────────────────────
+.category-pills-strip {
+  background: $bg-2;
+  border-bottom: 1px solid $border;
+  padding: 0.875rem 0;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  @include scrollbar;
+  .cat-pill { scroll-snap-align: start; }
+}
+
+// ── Quickview close bar ───────────────────────────
+.quickview-close-bar {
+  position: sticky; top: 0; z-index: 2;
+  display: flex; justify-content: flex-end;
+  padding: 0.875rem 1rem;
+  background: $bg-2;
+  border-bottom: 1px solid $border;
+  .close-btn {
+    width: 34px; height: 34px; @include flex-center;
+    border-radius: $r-sm;
+    background: $surface; border: 1px solid $border;
+    cursor: pointer; color: $text-muted;
+    font-size: 1rem; transition: all $t-fast;
+    &:hover { color: $accent; border-color: $accent; }
   }
 }
 
@@ -260,9 +327,22 @@
 }
 
 // ── Buttons shared ────────────────────────────────
-.btn-primary   { @include btn-base; background: $accent; color: #fff; &:hover { background: lighten($accent, 8%); transform: translateY(-1px); box-shadow: 0 6px 20px rgba($accent, 0.35); } }
-.btn-outline   { @include btn-base; background: transparent; color: $text; border: 1px solid $border; &:hover { border-color: $accent; color: $accent-2; } }
-.btn-ghost     { @include btn-base; background: transparent; color: $text-muted; &:hover { color: $accent; } }
+.btn-primary {
+  @include btn-base;
+  background: $accent; color: $on-accent; font-weight: 700;
+  &:hover { background: $accent-3; transform: translateY(-1px); box-shadow: 0 8px 22px rgba($accent, 0.45); }
+}
+.btn-outline {
+  @include btn-base;
+  background: transparent; color: $text;
+  border: 1px solid rgba($accent-2, 0.35);
+  &:hover { border-color: $accent; color: $accent-2; background: rgba($accent, 0.05); }
+}
+.btn-ghost {
+  @include btn-base;
+  background: transparent; color: $text-muted;
+  &:hover { color: $accent; }
+}
 
 // ── Mobile Filter Trigger Button ──────────────────
 .sort-bar .sort-left {
@@ -280,8 +360,8 @@
   &:hover { border-color: $accent; color: $accent-2; }
 
   .filter-count {
-    background: $accent; color: #fff;
-    font-size: 0.65rem; font-weight: 700;
+    background: $accent; color: $on-accent;
+    font-size: 0.65rem; font-weight: 800;
     min-width: 18px; height: 18px;
     padding: 0 0.4rem; border-radius: 99px;
     display: none; align-items: center; justify-content: center;
@@ -330,8 +410,8 @@
       display: inline-flex; align-items: center; gap: 0.5rem;
     }
     .active-count {
-      background: $accent; color: #fff;
-      font-size: 0.7rem; font-weight: 700;
+      background: $accent; color: $on-accent;
+      font-size: 0.7rem; font-weight: 800;
       min-width: 22px; height: 22px;
       padding: 0 0.5rem; border-radius: 99px;
       display: none; align-items: center; justify-content: center;
@@ -404,9 +484,9 @@
     }
     .btn-apply {
       @include btn-base; flex: 2; justify-content: center;
-      background: $accent; color: #fff;
-      font-weight: 600;
-      &:hover { background: lighten($accent, 8%); box-shadow: 0 6px 20px rgba($accent, 0.35); }
+      background: $accent; color: $on-accent;
+      font-weight: 700;
+      &:hover { background: $accent-3; box-shadow: 0 8px 24px rgba($accent, 0.45); }
     }
   }
 }
