@@ -263,3 +263,150 @@
 .btn-primary   { @include btn-base; background: $accent; color: #fff; &:hover { background: lighten($accent, 8%); transform: translateY(-1px); box-shadow: 0 6px 20px rgba($accent, 0.35); } }
 .btn-outline   { @include btn-base; background: transparent; color: $text; border: 1px solid $border; &:hover { border-color: $accent; color: $accent-2; } }
 .btn-ghost     { @include btn-base; background: transparent; color: $text-muted; &:hover { color: $accent; } }
+
+// ── Mobile Filter Trigger Button ──────────────────
+.sort-bar .sort-left {
+  display: flex; align-items: center; gap: 0.75rem;
+  min-width: 0;
+}
+.mobile-filter-btn {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  background: $surface-2; border: 1px solid $border;
+  border-radius: $r-md; padding: 0.5rem 0.875rem;
+  color: $text; font-size: 0.82rem; font-weight: 500;
+  cursor: pointer; transition: all $t-fast;
+  white-space: nowrap;
+  &:hover { border-color: $accent; color: $accent-2; }
+
+  .filter-count {
+    background: $accent; color: #fff;
+    font-size: 0.65rem; font-weight: 700;
+    min-width: 18px; height: 18px;
+    padding: 0 0.4rem; border-radius: 99px;
+    display: none; align-items: center; justify-content: center;
+    line-height: 1;
+    &.visible { display: inline-flex; }
+  }
+}
+
+// ── Mobile Filter Sheet ───────────────────────────
+.filter-sheet-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.65);
+  z-index: 950; opacity: 0; pointer-events: none;
+  transition: opacity $t-normal; backdrop-filter: blur(4px);
+  &.open { opacity: 1; pointer-events: all; }
+  @include lg { display: none !important; }
+}
+
+.filter-sheet {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  max-height: 88vh;
+  background: $bg-2;
+  border-top: 1px solid $border;
+  border-radius: $r-xl $r-xl 0 0;
+  z-index: 951;
+  display: flex; flex-direction: column;
+  transform: translateY(100%);
+  transition: transform $t-slow cubic-bezier(0.25,0.46,0.45,0.94);
+  box-shadow: 0 -20px 60px rgba(0,0,0,0.5);
+  &.open { transform: translateY(0); }
+  @include lg { display: none !important; }
+
+  .sheet-handle {
+    width: 42px; height: 4px;
+    background: $surface-3; border-radius: 99px;
+    margin: 0.6rem auto 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .sheet-header {
+    @include flex-between;
+    padding: 0.5rem 1.25rem 0.875rem;
+    border-bottom: 1px solid $border;
+    flex-shrink: 0;
+    h3 {
+      font-size: 1.05rem; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .active-count {
+      background: $accent; color: #fff;
+      font-size: 0.7rem; font-weight: 700;
+      min-width: 22px; height: 22px;
+      padding: 0 0.5rem; border-radius: 99px;
+      display: none; align-items: center; justify-content: center;
+      line-height: 1;
+      &.visible { display: inline-flex; }
+    }
+    .close-btn {
+      width: 34px; height: 34px; @include flex-center;
+      border-radius: $r-sm;
+      background: $surface; border: 1px solid $border;
+      cursor: pointer; color: $text-muted;
+      font-size: 1rem; transition: all $t-fast;
+      &:hover { color: $danger; border-color: rgba($danger, 0.3); }
+    }
+  }
+
+  .sheet-body {
+    flex: 1; min-height: 0;
+    overflow-y: auto; overscroll-behavior: contain;
+    padding: 1.25rem;
+    @include scrollbar;
+
+    .filter-section { margin-bottom: 1.5rem;
+      &:last-child { margin-bottom: 0; }
+    }
+    .filter-title {
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: $text-muted; margin-bottom: 0.875rem;
+    }
+    .price-range {
+      input[type=range] {
+        width: 100%; accent-color: $accent; cursor: pointer;
+        height: 3px; background: transparent;
+      }
+      .range-labels { @include flex-between; font-size: 0.8rem; color: $text-muted; margin-top: 0.4rem; }
+    }
+    .filter-check {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.5rem 0; cursor: pointer; font-size: 0.9rem; color: $text-muted;
+      transition: color $t-fast;
+      &:hover { color: $text; }
+      input[type=checkbox] { accent-color: $accent; width: 17px; height: 17px; cursor: pointer; }
+      .check-count { margin-left: auto; font-size: 0.72rem; color: $text-dim; }
+      &:has(input:checked) { color: $accent-2; }
+    }
+    .rating-filter {
+      display: flex; flex-direction: column; gap: 0.35rem;
+      .r-opt {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        padding: 0.55rem 0.75rem;
+        border-radius: $r-sm; cursor: pointer; transition: background $t-fast;
+        font-size: 0.85rem; color: $text-muted;
+        &:hover, &.active { background: rgba($accent, 0.08); color: $accent-2; }
+      }
+    }
+  }
+
+  .sheet-footer {
+    display: flex; gap: 0.6rem;
+    padding: 0.875rem 1.25rem;
+    padding-bottom: max(0.875rem, env(safe-area-inset-bottom));
+    background: $surface;
+    border-top: 1px solid $border;
+    flex-shrink: 0;
+    .btn-reset {
+      @include btn-base; flex: 1; justify-content: center;
+      background: transparent; color: $text-muted;
+      border: 1px solid $border;
+      &:hover { color: $text; border-color: $accent; }
+    }
+    .btn-apply {
+      @include btn-base; flex: 2; justify-content: center;
+      background: $accent; color: #fff;
+      font-weight: 600;
+      &:hover { background: lighten($accent, 8%); box-shadow: 0 6px 20px rgba($accent, 0.35); }
+    }
+  }
+}
