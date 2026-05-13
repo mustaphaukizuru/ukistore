@@ -88,9 +88,12 @@ input, select, textarea { font-family: $font-body; }
   background: linear-gradient(90deg, $surface 25%, $surface-2 50%, $surface 75%);
   background-size: 200% 100%;
   animation: shimmer 1.4s infinite;
-  border-radius: $r-md;
+  border-radius: $r-lg;
 }
+.card-skeleton { aspect-ratio: 3 / 4; min-height: 280px; }
+.grid-span-all { grid-column: 1 / -1; }
 @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+@keyframes float   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
 // ── Scrollbar everywhere ──────────────────────────
 @include scrollbar;

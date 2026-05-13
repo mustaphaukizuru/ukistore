@@ -10,10 +10,11 @@
 
   .brand {
     font-family: $font-heading; font-weight: 800; font-size: 1.3rem;
-    @include flex-gap(0.5rem);
+    @include flex-gap(0.5rem); color: $text;
     .brand-icon {
       width: 32px; height: 32px; border-radius: 9px;
-      background: linear-gradient(135deg, $accent, $accent-2);
+      background: linear-gradient(135deg, $accent 0%, $accent-2 100%);
+      box-shadow: 0 4px 12px rgba($accent, 0.4);
       @include flex-center; font-size: 1rem;
     }
   }
@@ -54,8 +55,8 @@
     .badge-count {
       position: absolute; top: -5px; right: -5px;
       width: 18px; height: 18px; border-radius: 50%;
-      background: $accent; color: #fff; font-size: 0.65rem;
-      font-weight: 700; @include flex-center;
+      background: $accent; color: $on-accent; font-size: 0.65rem;
+      font-weight: 800; @include flex-center;
       border: 2px solid $bg; display: none;
       &.visible { display: flex; }
     }

@@ -1,123 +1,337 @@
-// ── Product Card ─────────────────────────────────
+// ── Products Grid ─────────────────────────────────
+// Plain CSS Grid only — no Bootstrap `.row`/`.col`. Auto-fill keeps the
+// minimum card width readable, and we cap columns at xl for visual balance.
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.875rem;
+
+  @include sm { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+  @include md { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.125rem; }
+  @include lg { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.25rem; }
+  @include xl { grid-template-columns: repeat(4, 1fr); }
+
+  &.list-view {
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+    .product-card {
+      flex-direction: row;
+      .card-media { width: 200px; min-height: 180px; flex-shrink: 0; aspect-ratio: auto; }
+      .card-body  { padding: 1.25rem 1.5rem; }
+      .card-name  { font-size: 1.05rem; @include clamp(1); }
+      .card-footer .add-btn { max-width: 220px; }
+    }
+    @include max-sm {
+      .product-card { flex-direction: column;
+        .card-media { width: 100%; aspect-ratio: 1; }
+      }
+    }
+  }
+}
+
+// ── Product Card ──────────────────────────────────
 .product-card {
+  position: relative;
   background: $surface;
   border: 1px solid $border;
   border-radius: $r-lg;
   overflow: hidden;
-  @include card-hover;
-  position: relative;
-  height: 100%;
-  display: flex; flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+  transition: transform $t-normal, border-color $t-normal, box-shadow $t-normal;
 
-  .card-thumb {
-    position: relative; overflow: hidden;
-    background: $surface-2;
-    height: 220px;
-    @include flex-center;
-    font-size: 5rem;
+  &:hover {
+    transform: translateY(-4px);
+    border-color: $border-hover;
+    box-shadow: 0 18px 40px -10px rgba($accent, 0.30),
+                0 4px 12px rgba(0,0,0,0.4);
+    .card-media .media-glow { opacity: 1; transform: scale(1.05); }
+    .card-media .quick-view-btn { opacity: 1; transform: translateY(0); }
+    .card-emoji { transform: scale(1.08) rotate(-3deg); }
+  }
+
+  // ── Media ───────────────────────────────────────
+  .card-media {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(135deg, $bg-2 0%, $surface 100%);
+    overflow: hidden;
     cursor: pointer;
+    @include flex-center;
 
+    // Soft sunset glow behind the product
+    .media-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 55%,
+        rgba($accent, 0.35) 0%,
+        rgba($accent-2, 0.12) 35%,
+        transparent 70%);
+      opacity: 0.7;
+      transition: opacity $t-normal, transform $t-slow;
+      pointer-events: none;
+    }
+
+    // Subtle vignette ring for depth
     &::after {
-      content: ''; position: absolute; inset: 0;
-      background: rgba($accent, 0);
-      transition: background $t-normal;
+      content: '';
+      position: absolute; inset: 0;
+      box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.35);
+      pointer-events: none;
     }
 
-    .thumb-actions {
-      position: absolute; bottom: -50px; left: 0; right: 0;
-      display: flex; gap: 0.4rem; justify-content: center;
-      padding: 0 1rem; transition: bottom $t-normal;
+    .card-emoji {
+      position: relative;
+      font-size: clamp(3rem, 11vw, 5rem);
+      line-height: 1;
+      filter: drop-shadow(0 8px 16px rgba($brand-indigo, 0.5));
+      transition: transform $t-slow cubic-bezier(.34,1.56,.64,1);
+      z-index: 1;
+    }
+
+    .quick-view-btn {
+      position: absolute;
+      bottom: 0.75rem; left: 0.75rem; right: 0.75rem;
+      padding: 0.55rem 0.875rem;
+      background: rgba($bg, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba($accent-2, 0.25);
+      border-radius: $r-md;
+      color: $text;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity $t-normal, transform $t-normal, background $t-fast;
       z-index: 2;
-    }
-
-    &:hover {
-      &::after { background: rgba($accent, 0.08); }
-      .thumb-actions { bottom: 0.875rem; }
+      &:hover { background: rgba($accent, 0.18); border-color: $accent; color: $accent-2; }
+      // On touch devices keep it always visible — hover never fires reliably
+      @media (hover: none) { opacity: 1; transform: translateY(0); }
     }
   }
 
+  // ── Badges & wish ───────────────────────────────
   .card-badges {
-    position: absolute; top: 0.75rem; left: 0.75rem;
-    display: flex; flex-direction: column; gap: 0.3rem; z-index: 2;
+    position: absolute;
+    top: 0.65rem; left: 0.65rem;
+    display: flex; flex-direction: column; gap: 0.3rem;
+    z-index: 3;
   }
 
   .wish-btn {
-    position: absolute; top: 0.75rem; right: 0.75rem; z-index: 2;
-    width: 32px; height: 32px; border-radius: 50%;
-    background: rgba($bg, 0.75); border: 1px solid $border;
-    @include flex-center; cursor: pointer; color: $text-muted;
-    transition: all $t-fast; font-size: 0.9rem;
-    &:hover, &.active { color: #ef4444; border-color: rgba(#ef4444, 0.3); background: rgba(#ef4444, 0.1); }
+    position: absolute;
+    top: 0.65rem; right: 0.65rem;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: rgba($bg, 0.7);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba($accent-2, 0.18);
+    color: $text;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all $t-fast;
+    @include flex-center;
+    z-index: 3;
+    &:hover { background: rgba($accent, 0.18); border-color: $accent; color: $accent; transform: scale(1.08); }
+    &.active {
+      color: $accent;
+      background: rgba($accent, 0.18);
+      border-color: $accent;
+    }
   }
 
+  // ── Body ────────────────────────────────────────
   .card-body {
-    padding: 1.1rem; flex: 1; display: flex; flex-direction: column;
+    padding: 0.875rem 0.9rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    flex: 1;
+
+    @include sm { padding: 1rem 1rem 1.1rem; }
+  }
+
+  .card-meta {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 0.5rem;
+    min-height: 1rem;
   }
 
   .card-category {
-    font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.08em; margin-bottom: 0.4rem; color: $accent-2;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $accent-2;
+  }
+
+  .card-rating-inline {
+    display: inline-flex; align-items: center; gap: 0.25rem;
+    font-size: 0.72rem;
+    color: $text-muted;
+    .star-icon { color: $accent-2; font-size: 0.78rem; }
+    .rating-num { color: $text; font-weight: 600; }
   }
 
   .card-name {
-    font-family: $font-heading; font-size: 0.95rem; font-weight: 600;
-    @include clamp(2); margin-bottom: 0.5rem; flex: 1;
+    font-family: $font-heading;
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: $text;
+    @include clamp(2);
     cursor: pointer;
+    transition: color $t-fast;
+    margin: 0;
     &:hover { color: $accent-2; }
+
+    @include sm { font-size: 0.95rem; }
   }
 
   .card-rating {
-    @include flex-gap(0.4rem); margin-bottom: 0.6rem;
-    .rating-count { font-size: 0.75rem; color: $text-muted; }
+    display: flex; align-items: center; gap: 0.35rem;
+    font-size: 0.75rem;
+    .rating-count { color: $text-muted; }
   }
 
-  .card-price { @include flex-gap(0.2rem); align-items: baseline; margin-bottom: 1rem; }
+  // ── Price ───────────────────────────────────────
+  .card-price {
+    display: flex; flex-wrap: wrap; align-items: baseline;
+    gap: 0.4rem;
+    margin-top: auto;
+    padding-top: 0.25rem;
 
+    .price-new {
+      font-family: $font-heading;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: $text;
+      letter-spacing: -0.01em;
+    }
+    .price-old {
+      font-size: 0.78rem;
+      color: $text-dim;
+      text-decoration: line-through;
+      font-weight: 500;
+    }
+    .price-badge {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      padding: 0.18rem 0.45rem;
+      background: rgba($accent, 0.18);
+      color: $accent;
+      border-radius: 5px;
+      border: 1px solid rgba($accent, 0.3);
+    }
+  }
+
+  // ── Stock indicator ─────────────────────────────
+  .stock-pill {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 99px;
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    &.in  { color: $success; background: rgba($success, 0.1); }
+    &.low { color: $warning; background: rgba($warning, 0.12); }
+    &.out { color: $danger;  background: rgba($danger, 0.12); }
+  }
+
+  // ── Footer / CTA ────────────────────────────────
   .card-footer {
-    display: flex; gap: 0.4rem;
-    .add-btn { flex: 1; @include btn-base; background: $accent; color: #fff; justify-content: center; font-size: 0.82rem; padding: 0.55rem 1rem;
-      &:hover { background: lighten($accent, 8%); transform: translateY(-1px); box-shadow: 0 6px 20px rgba($accent, 0.35); }
-    }
-    .quick-btn { width: 36px; height: 36px; border-radius: $r-md; background: $surface-2; border: 1px solid $border; @include flex-center; cursor: pointer; font-size: 0.85rem; color: $text-muted; flex-shrink: 0; transition: all $t-fast;
-      &:hover { border-color: $accent; color: $accent; }
+    margin-top: 0.6rem;
+
+    .add-btn {
+      width: 100%;
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.4rem;
+      padding: 0.65rem 0.875rem;
+      background: $accent;
+      color: $on-accent;
+      font-family: $font-body;
+      font-weight: 700;
+      font-size: 0.82rem;
+      border: none; border-radius: $r-md;
+      cursor: pointer;
+      transition: background $t-fast, transform $t-fast, box-shadow $t-fast;
+      letter-spacing: 0.01em;
+
+      &:hover {
+        background: $accent-3;
+        transform: translateY(-1px);
+        box-shadow: 0 8px 18px -4px rgba($accent, 0.5);
+      }
+      &:active { transform: translateY(0); }
+      &:disabled, &[disabled] {
+        background: $surface-3;
+        color: $text-dim;
+        cursor: not-allowed;
+        &:hover { transform: none; box-shadow: none; background: $surface-3; }
+      }
     }
   }
 
-  // Out of stock
+  // ── Out of stock state ──────────────────────────
   &.out-of-stock {
-    .card-thumb::after { background: rgba($bg, 0.5); }
-    .add-btn { background: $surface-3; color: $text-muted; cursor: not-allowed;
-      &:hover { transform: none; box-shadow: none; }
+    .card-media .media-glow { opacity: 0.25; }
+    .card-emoji { filter: grayscale(0.6) drop-shadow(0 8px 16px rgba($brand-indigo, 0.5)); }
+    .card-media::after {
+      background: rgba($bg, 0.45);
+      box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5);
     }
   }
 }
 
 // ── Badges ────────────────────────────────────────
-.badge-new    { @include badge($success); }
-.badge-sale   { @include badge($danger); }
-.badge-hot    { @include badge($warning); }
-.badge-out    { @include badge($text-muted); }
+.badge-new, .badge-sale, .badge-hot, .badge-out {
+  display: inline-flex; align-items: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 0.22rem 0.55rem;
+  border-radius: 5px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.badge-new  { background: $success;     color: $brand-indigo; }
+.badge-hot  { background: $brand-gold;  color: $brand-indigo; }
+.badge-sale { background: $accent;      color: $on-accent; }
+.badge-out  { background: rgba($text-muted, 0.2); color: $text-muted; border: 1px solid rgba($text-muted, 0.3); }
 
 // ── Category Pill ─────────────────────────────────
 .cat-pill {
-  @include flex-gap(0.35rem);
-  font-size: 0.8rem; font-weight: 500; padding: 0.45rem 1rem;
-  border-radius: 99px; border: 1px solid $border;
-  background: $surface; color: $text-muted;
-  cursor: pointer; transition: all $t-fast; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.8rem; font-weight: 500;
+  padding: 0.45rem 1rem;
+  border-radius: 99px;
+  border: 1px solid $border;
+  background: $surface;
+  color: $text-muted;
+  cursor: pointer;
+  transition: all $t-fast;
+  white-space: nowrap;
   .cat-count { font-size: 0.7rem; color: $text-dim; }
 
-  &:hover, &.active {
-    background: rgba($accent, 0.1); border-color: $accent;
-    color: $accent-2;
-    .cat-count { color: $accent-2; }
+  &:hover { border-color: $accent; color: $text; .cat-count { color: $accent-2; } }
+  &.active {
+    background: $accent;
+    border-color: $accent;
+    color: $on-accent;
+    font-weight: 600;
+    .cat-count { color: rgba($on-accent, 0.7); }
   }
 }
 
 // ── Filter Sidebar ────────────────────────────────
 .filter-sidebar {
-  background: $surface; border: 1px solid $border;
-  border-radius: $r-lg; padding: 1.25rem;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $r-lg;
+  padding: 1.25rem;
   @include scrollbar;
 
   .filter-section { margin-bottom: 1.5rem;
@@ -132,7 +346,6 @@
     }
   }
 
-  // Price range
   .price-range {
     input[type=range] {
       width: 100%; accent-color: $accent; cursor: pointer;
@@ -141,7 +354,6 @@
     .range-labels { @include flex-between; font-size: 0.8rem; color: $text-muted; margin-top: 0.4rem; }
   }
 
-  // Checkboxes
   .filter-check {
     display: flex; align-items: center; gap: 0.6rem;
     padding: 0.35rem 0; cursor: pointer; font-size: 0.875rem; color: $text-muted;
@@ -152,14 +364,14 @@
     &:has(input:checked) { color: $accent-2; }
   }
 
-  // Rating filter
   .rating-filter {
     display: flex; flex-direction: column; gap: 0.35rem;
     .r-opt {
-      @include flex-gap(0.5rem); padding: 0.35rem 0.6rem;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.35rem 0.6rem;
       border-radius: $r-sm; cursor: pointer; transition: background $t-fast;
       font-size: 0.8rem; color: $text-muted;
-      &:hover, &.active { background: rgba($accent, 0.08); color: $accent-2; }
+      &:hover, &.active { background: rgba($accent, 0.1); color: $accent-2; }
     }
   }
 }
@@ -167,14 +379,17 @@
 // ── Sort Bar ──────────────────────────────────────
 .sort-bar {
   @include flex-between; flex-wrap: wrap; gap: 0.75rem;
-  padding: 0.875rem 1.1rem; background: $surface;
-  border: 1px solid $border; border-radius: $r-md; margin-bottom: 1.25rem;
+  padding: 0.875rem 1.1rem;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $r-md;
+  margin-bottom: 1.25rem;
 
   .results-text { font-size: 0.875rem; color: $text-muted;
     strong { color: $text; }
   }
 
-  .sort-controls { @include flex-gap(0.6rem); }
+  .sort-controls { display: inline-flex; align-items: center; gap: 0.6rem; }
 
   .sort-select {
     @include input-base; padding: 0.5rem 0.875rem;
@@ -183,28 +398,13 @@
     option { background: $bg-2; }
   }
 
-  .view-btns { @include flex-gap(0.3rem);
+  .view-btns { display: inline-flex; align-items: center; gap: 0.3rem;
     .view-btn {
       width: 34px; height: 34px; @include flex-center;
       border-radius: $r-sm; border: 1px solid $border;
       background: transparent; color: $text-muted; cursor: pointer;
       transition: all $t-fast; font-size: 0.9rem;
-      &.active, &:hover { background: rgba($accent, 0.1); border-color: $accent; color: $accent; }
+      &.active, &:hover { background: rgba($accent, 0.12); border-color: $accent; color: $accent; }
     }
-  }
-}
-
-// ── Grid / List views ─────────────────────────────
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1.1rem;
-  &.list-view {
-    grid-template-columns: 1fr;
-    .product-card { flex-direction: row;
-      .card-thumb { width: 180px; height: 100%; flex-shrink: 0; min-height: 160px; }
-      .card-body { padding: 1.25rem; }
-    }
-    @include max-sm { .product-card { flex-direction: column; } }
   }
 }
