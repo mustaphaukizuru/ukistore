@@ -24,7 +24,7 @@
 
 // ── Gradient text ─────────────────────────────────
 @mixin grad-text {
-  background: linear-gradient(135deg, $brand-indigo 0%, $accent 60%, $accent-3 100%);
+  background: linear-gradient(135deg, $pure-black 0%, $brand-violet 55%, $brand-orchid 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -60,9 +60,9 @@
   &::-webkit-scrollbar { width: 6px; height: 6px; }
   &::-webkit-scrollbar-track { background: transparent; }
   &::-webkit-scrollbar-thumb {
-    background: rgba($brand-indigo, 0.2);
+    background: rgba($brand-violet, 0.3);
     border-radius: 99px;
-    &:hover { background: rgba($brand-indigo, 0.35); }
+    &:hover { background: rgba($brand-violet, 0.5); }
   }
 }
 

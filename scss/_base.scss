@@ -78,12 +78,12 @@ input, select, textarea { font-family: $font-body; }
 .stars {
   display: inline-flex; gap: 2px; align-items: center;
   .star {
-    color: $brand-gold;
-    font-size: 0.85rem;
-    filter: drop-shadow(0 0 1px rgba($warning, 0.4));
+    color: $brand-violet;
+    font-size: 0.9rem;
+    filter: drop-shadow(0 0 1px rgba($brand-violet, 0.35));
   }
   .star.empty {
-    color: rgba($brand-indigo, 0.18);
+    color: rgba($pure-black, 0.18);
     filter: none;
   }
 }
@@ -101,9 +101,9 @@ input, select, textarea { font-family: $font-body; }
 // ── Skeleton loader ───────────────────────────────
 .skeleton {
   background: linear-gradient(90deg,
-    rgba($brand-indigo, 0.05) 25%,
-    rgba($brand-indigo, 0.10) 50%,
-    rgba($brand-indigo, 0.05) 75%);
+    rgba($brand-violet, 0.06) 25%,
+    rgba($brand-violet, 0.14) 50%,
+    rgba($brand-violet, 0.06) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.4s infinite;
   border-radius: $r-lg;

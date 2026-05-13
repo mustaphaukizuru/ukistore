@@ -67,8 +67,8 @@
     aspect-ratio: 1 / 1;
     width: 100%;
     min-width: 0;
-    // Soft warm cream-to-mint backdrop — subtle, premium, lets the product pop
-    background: linear-gradient(135deg, #FDF5EC 0%, #F9F4E8 50%, #F0F6EB 100%);
+    // Soft lavender-to-orchid backdrop — wisteria-inspired, makes the product pop
+    background: linear-gradient(135deg, #F5F0FF 0%, #FAF6FE 50%, #F8E8FA 100%);
     overflow: hidden;
     cursor: pointer;
     @include flex-center;
@@ -77,9 +77,9 @@
       position: absolute;
       inset: 0;
       background: radial-gradient(circle at 50% 55%,
-        rgba($brand-orange, 0.22) 0%,
-        rgba($brand-gold, 0.18) 30%,
-        transparent 70%);
+        rgba($brand-orchid, 0.22) 0%,
+        rgba($brand-violet, 0.12) 35%,
+        transparent 72%);
       opacity: 0.55;
       transition: opacity $t-normal, transform $t-slow;
       pointer-events: none;
@@ -95,11 +95,11 @@
       z-index: 1;
     }
 
-    // Soft inner ring — replaces the black vignette
+    // Soft violet inner ring — gives depth without harsh vignette
     &::after {
       content: '';
       position: absolute; inset: 0;
-      box-shadow: inset 0 0 40px rgba($brand-indigo, 0.06);
+      box-shadow: inset 0 0 40px rgba($brand-violet, 0.08);
       pointer-events: none;
     }
 
@@ -107,7 +107,7 @@
       position: relative;
       font-size: clamp(2.6rem, 14vw, 5.2rem);
       line-height: 1;
-      filter: drop-shadow(0 6px 12px rgba($brand-indigo, 0.18));
+      filter: drop-shadow(0 6px 12px rgba($brand-violet, 0.22));
       transition: transform $t-slow cubic-bezier(.34, 1.56, .64, 1);
       z-index: 2;
       user-select: none;
@@ -134,7 +134,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      box-shadow: 0 4px 12px rgba($brand-indigo, 0.12);
+      box-shadow: 0 4px 12px rgba($brand-violet, 0.12);
       &:hover { background: $accent; border-color: $accent; color: $on-accent; }
       @media (hover: none) { opacity: 1; transform: translateY(0); }
     }
@@ -166,7 +166,7 @@
     transition: all $t-fast;
     @include flex-center;
     z-index: 4;
-    box-shadow: 0 2px 6px rgba($brand-indigo, 0.08);
+    box-shadow: 0 2px 6px rgba($brand-violet, 0.08);
     &:hover { background: $accent; border-color: $accent; color: $on-accent; transform: scale(1.08); }
     &.active { color: $accent; background: $pure-white; border-color: $accent; }
     &.active:hover { background: $accent; color: $on-accent; }
@@ -197,11 +197,11 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: $brand-indigo;             // 15:1 on the chip — easily passes AA
-    background: rgba($accent, 0.13);
+    color: $brand-violet;             // ~7.7:1 on lavender chip — AAA
+    background: rgba($brand-violet, 0.10);
     padding: 0.22rem 0.5rem;
     border-radius: 5px;
-    border: 1px solid rgba($accent, 0.2);
+    border: 1px solid rgba($brand-violet, 0.22);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -216,7 +216,11 @@
     color: $text-muted;
     white-space: nowrap;
     flex-shrink: 0;
-    .star-icon { color: $brand-gold; font-size: 0.78rem; filter: drop-shadow(0 0 1px rgba($warning, 0.4)); }
+    .star-icon {
+      color: $brand-violet;
+      font-size: 0.82rem;
+      filter: drop-shadow(0 0 1px rgba($brand-violet, 0.35));
+    }
     .rating-num { color: $text-strong; font-weight: 700; }
   }
 
@@ -263,8 +267,8 @@
       font-weight: 800;
       letter-spacing: 0.03em;
       padding: 0.2rem 0.45rem;
-      background: $accent;
-      color: $on-accent;
+      background: $brand-orchid;       // pink-magenta discount chip — high visibility
+      color: $pure-black;              // 9.2:1 contrast
       border-radius: 4px;
       line-height: 1;
     }
@@ -342,11 +346,11 @@
   border-radius: 5px;
   text-transform: uppercase;
   line-height: 1;
-  box-shadow: 0 2px 6px rgba($brand-indigo, 0.15);
+  box-shadow: 0 2px 6px rgba($brand-violet, 0.18);
 }
-.badge-new  { background: $success;     color: $pure-white; }
-.badge-hot  { background: $brand-gold;  color: $brand-indigo; }
-.badge-sale { background: $accent;      color: $on-accent; }
+.badge-new  { background: $success;       color: $pure-white;  }   // green + white   — 4.5:1
+.badge-hot  { background: $brand-orchid;  color: $pure-black;  }   // orchid + black  — 9.2:1
+.badge-sale { background: $brand-violet;  color: $pure-white;  }   // violet + white  — 7.1:1
 .badge-out  { background: $surface; color: $text-muted; border: 1px solid $border-strong; box-shadow: none; }
 
 // ── Category Pill ─────────────────────────────────
@@ -365,7 +369,7 @@
   .cat-count {
     font-size: 0.7rem;
     color: $text-muted;
-    background: rgba($brand-indigo, 0.08);
+    background: rgba($brand-violet, 0.08);
     padding: 0.05rem 0.45rem;
     border-radius: 99px;
     font-weight: 700;
@@ -443,7 +447,7 @@
       margin-left: auto;
       font-size: 0.72rem; font-weight: 700;
       color: $text-muted;
-      background: rgba($brand-indigo, 0.06);
+      background: rgba($brand-violet, 0.06);
       padding: 0.1rem 0.45rem;
       border-radius: 99px;
     }
@@ -531,7 +535,7 @@
       cursor: pointer;
       transition: all $t-fast;
       font-size: 0.9rem;
-      &:hover { color: $text-strong; background: rgba($brand-indigo, 0.06); }
+      &:hover { color: $text-strong; background: rgba($brand-violet, 0.06); }
       &.active { background: $accent; color: $on-accent; }
     }
   }
