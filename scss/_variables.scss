@@ -1,33 +1,46 @@
-// ── Colors ────────────────────────────────────────
-$bg:           #0a0a0f;
-$bg-2:         #111118;
-$surface:      #16161f;
-$surface-2:    #1e1e2a;
-$surface-3:    #252535;
-$border:       rgba(139, 92, 246, 0.12);
-$border-hover: rgba(139, 92, 246, 0.35);
+// ── Brand palette ─────────────────────────────────
+// Source colors — single source of truth
+$brand-indigo:  #1E104E;  // deep indigo  rgb(30, 16, 78)
+$brand-plum:    #452E5A;  // muted plum   rgb(69, 46, 90)
+$brand-orange:  #FF653F;  // vibrant orange rgb(255, 101, 63) — primary CTA
+$brand-gold:    #FFC85C;  // warm gold    rgb(255, 200, 92) — highlight / ratings
 
-$accent:       #8b5cf6;
-$accent-2:     #a78bfa;
-$accent-3:     #c4b5fd;
-$accent-glow:  rgba(139, 92, 246, 0.2);
+// ── Surfaces (derived) ────────────────────────────
+$bg:           #0a0518;            // deepest — page background
+$bg-2:         #130a30;            // section background
+$surface:      $brand-indigo;      // card / sidebar surface
+$surface-2:    #2a1a5e;            // elevated surface
+$surface-3:    $brand-plum;        // top-level elevation / pressed states
+$border:       rgba(255, 200, 92, 0.10);   // gold-tinted border
+$border-hover: rgba(255, 101, 63, 0.40);   // warm orange on hover
 
-$text:         #f5f3ff;
-$text-muted:   #8b88a8;
-$text-dim:     #3d3d55;
+// ── Accents ───────────────────────────────────────
+$accent:       $brand-orange;
+$accent-2:     $brand-gold;
+$accent-3:     #ffb293;            // peach (lighter accent)
+$accent-glow:  rgba(255, 101, 63, 0.25);
 
-$success:      #10b981;
-$warning:      #f59e0b;
+// On-accent text — must contrast against orange/gold backgrounds
+$on-accent:    $brand-indigo;      // dark text on bright backgrounds
+
+// ── Text ──────────────────────────────────────────
+$text:         #fff5e6;            // warm white
+$text-muted:   #b0a4c4;            // muted lavender
+$text-dim:     #6b5a82;            // tertiary
+
+// ── Semantic ──────────────────────────────────────
+$success:      #4ade80;
+$warning:      $brand-gold;
 $danger:       #ef4444;
-$info:         #06b6d4;
+$info:         #82c8e8;
 
 // ── Tags / category colors ────────────────────────
-$cat-electronics: #06b6d4;
-$cat-fashion:     #ec4899;
-$cat-home:        #10b981;
-$cat-sports:      #f59e0b;
-$cat-beauty:      #a855f7;
-$cat-books:       #6366f1;
+$cat-electronics: #82c8e8;
+$cat-fashion:     #ff9bb8;
+$cat-home:        #98e6c7;
+$cat-sports:      $brand-gold;
+$cat-beauty:      #c8a4e6;
+$cat-books:       $brand-orange;
 
 // ── Typography ────────────────────────────────────
 $font-heading: 'Plus Jakarta Sans', sans-serif;

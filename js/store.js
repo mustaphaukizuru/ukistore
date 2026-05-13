@@ -117,10 +117,12 @@ function toggleWish(id) {
   if (idx >= 0) { State.wishlist.splice(idx, 1); toast('Removed from wishlist', 'info'); }
   else { State.wishlist.push(id); toast('Added to wishlist ♡', 'success'); }
   persist();
-  // Update wish buttons
+  const wished = State.wishlist.includes(id);
   document.querySelectorAll(`.wish-btn[data-id="${id}"]`).forEach(btn => {
-    btn.classList.toggle('active', State.wishlist.includes(id));
-    btn.textContent = State.wishlist.includes(id) ? '♥' : '♡';
+    btn.classList.toggle('active', wished);
+    btn.textContent = wished ? '♥' : '♡';
+    btn.setAttribute('aria-pressed', String(wished));
+    btn.setAttribute('aria-label', wished ? 'Remove from wishlist' : 'Add to wishlist');
   });
 }
 
@@ -128,44 +130,48 @@ function toggleWish(id) {
 function renderCard(p) {
   const wished = State.wishlist.includes(p.id);
   const pct = discount(p.oldPrice, p.price);
-  const sl = stockLabel(p.stock);
   const badgeMap = { hot: 'badge-hot', new: 'badge-new', sale: 'badge-sale' };
+  const lowStock = p.stock > 0 && p.stock < 20;
 
   return `
-  <div class="col reveal">
-    <div class="product-card${p.stock === 0 ? ' out-of-stock' : ''}">
-      <div class="card-badges">
-        ${p.badge ? `<span class="${badgeMap[p.badge] || ''}">${p.badge.toUpperCase()}</span>` : ''}
-        ${p.stock === 0 ? '<span class="badge-out">OUT OF STOCK</span>' : ''}
+  <article class="product-card reveal${p.stock === 0 ? ' out-of-stock' : ''}">
+    <div class="card-badges">
+      ${p.badge ? `<span class="${badgeMap[p.badge] || ''}">${p.badge}</span>` : ''}
+      ${p.stock === 0 ? '<span class="badge-out">Sold out</span>' : ''}
+      ${lowStock ? `<span class="stock-pill low">Only ${p.stock} left</span>` : ''}
+    </div>
+    <button class="wish-btn${wished ? ' active' : ''}" data-id="${p.id}"
+      aria-label="${wished ? 'Remove from wishlist' : 'Add to wishlist'}"
+      aria-pressed="${wished}"
+      onclick="toggleWish(${p.id})">${wished ? '♥' : '♡'}</button>
+    <div class="card-media" onclick="openQuickView(${p.id})" role="button" tabindex="0"
+      aria-label="Quick view ${p.name}"
+      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openQuickView(${p.id})}">
+      <div class="media-glow" aria-hidden="true"></div>
+      <div class="card-emoji" aria-hidden="true">${p.emoji}</div>
+      <button class="quick-view-btn" onclick="event.stopPropagation();openQuickView(${p.id})">Quick view</button>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-category">${p.category}</span>
+        <span class="card-rating-inline" aria-label="Rated ${p.rating} out of 5">
+          <span class="star-icon" aria-hidden="true">★</span>
+          <span class="rating-num">${p.rating}</span>
+          <span>(${p.reviews.toLocaleString()})</span>
+        </span>
       </div>
-      <button class="wish-btn${wished ? ' active' : ''}" data-id="${p.id}" onclick="toggleWish(${p.id})">${wished ? '♥' : '♡'}</button>
-      <div class="card-thumb" onclick="openQuickView(${p.id})">
-        <div style="font-size:5rem">${p.emoji}</div>
-        <div class="thumb-actions">
-          <button class="quick-btn" onclick="event.stopPropagation();openQuickView(${p.id})" title="Quick View">👁</button>
-          <button class="quick-btn" onclick="event.stopPropagation();toggleWish(${p.id})" title="Wishlist">${wished ? '♥' : '♡'}</button>
-        </div>
+      <h3 class="card-name" onclick="openQuickView(${p.id})">${p.name}</h3>
+      <div class="card-price">
+        <span class="price-new">$${fmt(p.price)}</span>
+        ${p.oldPrice ? `<span class="price-old">$${fmt(p.oldPrice)}</span><span class="price-badge">−${pct}%</span>` : ''}
       </div>
-      <div class="card-body">
-        <div class="card-category">${p.category}</div>
-        <div class="card-name" onclick="openQuickView(${p.id})">${p.name}</div>
-        <div class="card-rating">
-          <div class="stars">${stars(p.rating)}</div>
-          <span class="rating-count">(${p.reviews.toLocaleString()})</span>
-        </div>
-        <div class="card-price">
-          <span class="price-new">$${fmt(p.price)}</span>
-          ${p.oldPrice ? `<span class="price-old">$${fmt(p.oldPrice)}</span><span class="price-badge">-${pct}%</span>` : ''}
-        </div>
-        <div class="card-footer">
-          <button class="add-btn" onclick="addToCart(${p.id})" ${p.stock === 0 ? 'disabled' : ''}>
-            ${p.stock === 0 ? 'Out of Stock' : '+ Add to Cart'}
-          </button>
-          <button class="quick-btn" onclick="openQuickView(${p.id})" title="Quick View">👁</button>
-        </div>
+      <div class="card-footer">
+        <button class="add-btn" onclick="addToCart(${p.id})" ${p.stock === 0 ? 'disabled aria-disabled="true"' : ''}>
+          ${p.stock === 0 ? 'Sold out' : 'Add to cart'}
+        </button>
       </div>
     </div>
-  </div>`;
+  </article>`;
 }
 
 function applyFilters() {
@@ -196,7 +202,7 @@ function applyFilters() {
 
 function renderProducts() {
   const grid = $('#productsGrid');
-  grid.className = `products-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-3 ${State.view === 'list' ? 'list-view' : ''}`;
+  grid.className = `products-grid${State.view === 'list' ? ' list-view' : ''}`;
 
   $('#resultsCount').innerHTML = `<strong>${State.filtered.length}</strong> products`;
   const sheetCount = $('#sheetResultsCount');
@@ -204,7 +210,7 @@ function renderProducts() {
   updateActiveFilterCount();
 
   if (State.filtered.length === 0) {
-    grid.innerHTML = `<div class="col-12"><div class="empty-state"><div class="empty-icon">🔍</div><h3>No products found</h3><p>Try adjusting your filters or search term.</p></div></div>`;
+    grid.innerHTML = `<div class="empty-state grid-span-all"><div class="empty-icon">🔍</div><h3>No products found</h3><p>Try adjusting your filters or search term.</p></div>`;
     return;
   }
 
