@@ -24,7 +24,7 @@
 
 // ── Gradient text ─────────────────────────────────
 @mixin grad-text {
-  background: linear-gradient(135deg, $text 0%, $accent-3 50%, $accent 100%);
+  background: linear-gradient(135deg, $brand-indigo 0%, $accent 60%, $accent-3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -57,17 +57,27 @@
 
 // ── Scrollbar ─────────────────────────────────────
 @mixin scrollbar {
-  &::-webkit-scrollbar { width: 4px; height: 4px; }
-  &::-webkit-scrollbar-track { background: $surface; }
-  &::-webkit-scrollbar-thumb { background: $accent; border-radius: 99px; }
+  &::-webkit-scrollbar { width: 6px; height: 6px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb {
+    background: rgba($brand-indigo, 0.2);
+    border-radius: 99px;
+    &:hover { background: rgba($brand-indigo, 0.35); }
+  }
 }
 
 // ── Input base ────────────────────────────────────
 @mixin input-base {
-  width: 100%; background: $surface; border: 1px solid $border;
-  border-radius: $r-md; padding: 0.7rem 1rem;
-  color: $text; font-family: $font-body; font-size: 0.875rem;
-  outline: none; transition: border-color $t-fast, box-shadow $t-fast;
+  width: 100%;
+  background: $surface;
+  border: 1px solid $border-strong;
+  border-radius: $r-md;
+  padding: 0.7rem 1rem;
+  color: $text-strong;
+  font-family: $font-body;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color $t-fast, box-shadow $t-fast;
   &::placeholder { color: $text-dim; }
   &:focus { border-color: $accent; box-shadow: 0 0 0 3px $accent-glow; }
 }

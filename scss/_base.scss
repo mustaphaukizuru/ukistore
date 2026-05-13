@@ -38,21 +38,28 @@ input, select, textarea { font-family: $font-body; }
 
 // ── Toast ─────────────────────────────────────────
 .toast-container {
-  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999;
+  position: fixed;
+  bottom: max(1.5rem, env(safe-area-inset-bottom));
+  right: 1.5rem;
+  z-index: 9999;
   display: flex; flex-direction: column; gap: 0.5rem;
+  @include max-sm { right: 1rem; left: 1rem; align-items: stretch; }
 }
 .toast {
   display: flex; align-items: center; gap: 0.75rem;
-  background: $surface-2; border: 1px solid $border;
-  border-radius: $r-md; padding: 0.85rem 1.1rem;
-  font-size: 0.875rem; color: $text;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  background: $surface;
+  border: 1px solid $border-strong;
+  border-radius: $r-md;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.875rem;
+  color: $text-strong;
+  box-shadow: $shadow-md;
   animation: toast-in 0.3s ease;
   min-width: 240px; max-width: 320px;
   .toast-icon { font-size: 1.1rem; flex-shrink: 0; }
-  &.toast-success { border-color: rgba($success, 0.3); .toast-icon { color: $success; } }
-  &.toast-error   { border-color: rgba($danger, 0.3);  .toast-icon { color: $danger; } }
-  &.toast-info    { border-color: rgba($accent, 0.3);  .toast-icon { color: $accent; } }
+  &.toast-success { border-color: rgba($success, 0.45); .toast-icon { color: $success; } }
+  &.toast-error   { border-color: rgba($danger, 0.45);  .toast-icon { color: $danger; } }
+  &.toast-info    { border-color: rgba($accent, 0.45);  .toast-icon { color: $accent; } }
 }
 @keyframes toast-in {
   from { opacity:0; transform: translateX(20px); }
@@ -69,26 +76,38 @@ input, select, textarea { font-family: $font-body; }
 
 // ── Rating stars ──────────────────────────────────
 .stars {
-  display: flex; gap: 2px; align-items: center;
-  .star { color: $warning; font-size: 0.8rem; }
-  .star.empty { color: $text-dim; }
+  display: inline-flex; gap: 2px; align-items: center;
+  .star {
+    color: $brand-gold;
+    font-size: 0.85rem;
+    filter: drop-shadow(0 0 1px rgba($warning, 0.4));
+  }
+  .star.empty {
+    color: rgba($brand-indigo, 0.18);
+    filter: none;
+  }
 }
 
-// ── Price styles ──────────────────────────────────
-.price-new { font-family: $font-heading; font-weight: 700; color: $text; }
-.price-old { font-size: 0.8rem; color: $text-muted; text-decoration: line-through; margin-left: 0.4rem; }
+// ── Price styles (used in cart drawer, quickview) ─
+.price-new { font-family: $font-heading; font-weight: 700; color: $text-strong; }
+.price-old { font-size: 0.8rem; color: $text-dim; text-decoration: line-through; margin-left: 0.4rem; }
 .price-badge {
-  font-size: 0.68rem; font-weight: 700; padding: 0.15rem 0.5rem;
-  background: rgba($danger, 0.15); color: $danger;
+  font-size: 0.68rem; font-weight: 800; padding: 0.18rem 0.5rem;
+  background: $accent; color: $on-accent;
   border-radius: 4px; margin-left: 0.4rem;
+  letter-spacing: 0.02em;
 }
 
 // ── Skeleton loader ───────────────────────────────
 .skeleton {
-  background: linear-gradient(90deg, $surface 25%, $surface-2 50%, $surface 75%);
+  background: linear-gradient(90deg,
+    rgba($brand-indigo, 0.05) 25%,
+    rgba($brand-indigo, 0.10) 50%,
+    rgba($brand-indigo, 0.05) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.4s infinite;
   border-radius: $r-lg;
+  border: 1px solid $border;
 }
 .card-skeleton { aspect-ratio: 3 / 4; min-height: 280px; }
 .grid-span-all { grid-column: 1 / -1; }

@@ -4,3 +4,6 @@ Thumbs.db
 *.log
 *.css.map
 .env
+
+# Claude Code per-user IDE state — keep `launch.json` tracked, ignore the rest
+.claude/settings.local.json

@@ -1,19 +1,20 @@
 // ── Navbar ────────────────────────────────────────
 .navbar-store {
   position: sticky; top: 0; z-index: 500;
-  background: rgba($bg, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba($brand-mint, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid $border;
   padding: 0.875rem 0;
   transition: all $t-normal;
+  @include max-sm { padding: 0.7rem 0; }
 
   .brand {
     font-family: $font-heading; font-weight: 800; font-size: 1.3rem;
-    @include flex-gap(0.5rem); color: $text;
+    @include flex-gap(0.5rem); color: $text-strong;
     .brand-icon {
       width: 32px; height: 32px; border-radius: 9px;
-      background: linear-gradient(135deg, $accent 0%, $accent-2 100%);
+      background: linear-gradient(135deg, $accent 0%, $brand-gold 100%);
       box-shadow: 0 4px 12px rgba($accent, 0.4);
       @include flex-center; font-size: 1rem;
     }
@@ -26,8 +27,12 @@
     input {
       @include input-base;
       padding-left: 2.5rem; padding-right: 1rem;
-      background: $surface-2; border-radius: 99px;
+      background: $surface;
+      border: 1px solid $border-strong;
+      border-radius: 99px;
       font-size: 0.85rem;
+      color: $text-strong;
+      &::placeholder { color: $text-dim; }
     }
     .search-icon {
       position: absolute; left: 0.875rem; top: 50%;
@@ -40,7 +45,7 @@
       cursor: pointer; background: none; border: none; padding: 0;
       display: none;
       &.visible { display: block; }
-      &:hover { color: $text; }
+      &:hover { color: $accent; }
     }
   }
 
@@ -48,9 +53,11 @@
     position: relative;
     width: 40px; height: 40px; border-radius: $r-md;
     background: $surface; border: 1px solid $border;
-    @include flex-center; cursor: pointer; color: $text-muted;
-    transition: all $t-fast; font-size: 1rem;
+    @include flex-center; cursor: pointer; color: $text;
+    transition: all $t-fast; font-size: 1rem; flex-shrink: 0;
+    box-shadow: $shadow-sm;
     &:hover { border-color: $accent; color: $accent; background: rgba($accent, 0.08); }
+    @include max-sm { width: 38px; height: 38px; }
 
     .badge-count {
       position: absolute; top: -5px; right: -5px;
@@ -67,7 +74,7 @@
 .mobile-search {
   display: none; padding: 0.75rem 1rem;
   border-top: 1px solid $border;
-  background: $bg-2;
+  background: $surface;
   &.open { display: block; }
   input { @include input-base; border-radius: 99px; font-size: 0.875rem; }
 }
